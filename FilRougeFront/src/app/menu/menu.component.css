@@ -6,3 +6,13 @@ a{
     text-align: center;
     font-family: Roboto;
 }
+
+@media (max-width: 500px){
+    .image-voiture{
+        width: 250px;
+    }
+}
+
+.aCliquable{
+    cursor: pointer;
+}

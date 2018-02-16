@@ -1,14 +1,15 @@
 
 <mat-sidenav-container mode="over" fullscreen>
-    <mat-sidenav  #sidenav>
+    <mat-sidenav opened="{{sideNavService.sideNav}}">
         <app-menu></app-menu>
     </mat-sidenav>
     <mat-sidenav-content>
         <div [style.minHeight.%]="100" fxLayout="column" layout-fill flex>
                 <mat-toolbar color="primary" fxLayoutAlign="space-between center">
-                            <button mat-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-                            {{title}}
-                            <button mat-button (click)="sidenav.toggle()">Déconnexion</button>
+                            <button mat-button (click)="sideNavService.toggleNav()"><mat-icon>menu</mat-icon></button>
+                            <button class="aCliquable" routerLink="/accueil">{{title}}</button>
+                            <button mat-button (click)="sideNavService.toggleNav()"><mat-icon>settings</mat-icon></button>
+                            <button mat-button (click)="sideNavService.toggleNav()"><mat-icon>exit_to_app</mat-icon></button>
                                             
                 </mat-toolbar>
             <app-body fxFlex="1"></app-body> <!--mettre un ngIf lorsqu'il y aura le module de connection en Oath2-->

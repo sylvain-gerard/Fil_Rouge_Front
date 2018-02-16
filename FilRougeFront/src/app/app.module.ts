@@ -22,6 +22,8 @@ import { AffaireComponent } from './affaire/affaire.component';
 import { ArmeComponent } from './arme/arme.component';
 import { VehiculeComponent } from './vehicule/vehicule.component';
 import { AdminComponent } from './admin/admin.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { SidenavService } from './sidenav.service';
 
 
 @NgModule({
@@ -47,9 +49,10 @@ import { AdminComponent } from './admin/admin.component';
     MatIconModule,
     MatToolbarModule,
     MatCardModule,
-    MatSidenavModule
+    MatSidenavModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [SidenavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
