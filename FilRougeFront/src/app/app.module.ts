@@ -9,7 +9,13 @@ import {
   MatIconModule,
   MatToolbarModule,
   MatCardModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatInputModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatNativeDateModule,
+  MatDatepickerModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -50,6 +56,12 @@ import { SidenavService } from './sidenav.service';
     MatToolbarModule,
     MatCardModule,
     MatSidenavModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     AppRoutingModule
   ],
   providers: [SidenavService],

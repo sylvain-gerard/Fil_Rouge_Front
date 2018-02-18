@@ -1,3 +1,73 @@
-<p>
-  admin works!
-</p>
+<!-- <div class="filtreTableAgent mat-elevation-z8"> -->
+  <div class="filtreTableAgent">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+    </mat-form-field>
+  </div>
+
+  <mat-table class="filtreTableAgent" #table [dataSource]="dataSource">
+    <!-- Nom Column -->
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let agent"> {{agent.nom}} </mat-cell>
+    </ng-container>
+
+    <!-- Prenom Column -->
+    <ng-container matColumnDef="prenom">
+      <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+      <mat-cell *matCellDef="let agent"> {{agent.prenom}} </mat-cell>
+    </ng-container>
+
+    <!-- Matricule Column -->
+    <ng-container matColumnDef="matricule">
+      <mat-header-cell *matHeaderCellDef> Matricule </mat-header-cell>
+      <mat-cell *matCellDef="let agent"> {{agent.matricule}} </mat-cell>
+    </ng-container>
+
+    <!-- Mot de passe Column -->
+    <ng-container matColumnDef="password">
+      <mat-header-cell *matHeaderCellDef> Mot de passe </mat-header-cell>
+      <mat-cell *matCellDef="let agent"> {{agent.password}} </mat-cell>
+    </ng-container>
+
+    <!-- Habilitation Column -->
+    <ng-container matColumnDef="habilitation">
+      <mat-header-cell *matHeaderCellDef> Habilitation </mat-header-cell>
+      <mat-cell *matCellDef="let agent"> {{agent.habilitation}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+<!-- </div> -->
+
+<form class="adminForm">
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Nom">
+  </mat-form-field>
+
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Prénom">
+  </mat-form-field>
+
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Matricule">
+  </mat-form-field>
+
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Mot de passe">
+  </mat-form-field>
+
+  <mat-form-field class="inputFullWidth">
+    <mat-select placeholder="Habilitation">
+      <mat-option *ngFor="let habilitation of habilitations" [value]="habilitation.value">
+        {{ habilitation.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+    <button mat-button color="primary">Ajouter</button>
+    <button mat-button color="primary">Modifier</button>
+    <button mat-button color="primary">Supprimer</button>
+</form>
+

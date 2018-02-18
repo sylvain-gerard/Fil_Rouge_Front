@@ -1,3 +1,52 @@
-<p>
-  affaire works!
-</p>
+<!-- <div class="filtreTableAgent mat-elevation-z8"> -->
+  <div class="filtreTableAffaire">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+    </mat-form-field>
+  </div>
+
+  <mat-table class="filtreTableAffaire" #table [dataSource]="dataSourceAffaire">
+    <!-- Nom Column -->
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let affaire"> {{affaire.nom}} </mat-cell>
+    </ng-container>
+
+    <!-- Date Creation Column -->
+    <ng-container matColumnDef="dateCreation">
+      <mat-header-cell *matHeaderCellDef> Création </mat-header-cell>
+      <mat-cell *matCellDef="let affaire"> {{affaire.dateCreation}} </mat-cell>
+    </ng-container>
+
+    <!-- Clos Column -->
+    <ng-container matColumnDef="clos">
+      <mat-header-cell *matHeaderCellDef> Clos </mat-header-cell>
+      <mat-cell *matCellDef="let affaire"> {{affaire.clos}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+<!-- </div> -->
+
+<form class="adminForm">
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Nom">
+  </mat-form-field>
+
+  <mat-form-field class="inputFullWidth">
+    <input matInput [matDatepicker]="picker" placeholder="Date de création">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <br>
+
+  <mat-checkbox>Clore l'affaire</mat-checkbox>
+
+  <br>
+
+  <button mat-button color="primary">Ajouter</button>
+  <button mat-button color="primary">Modifier</button>
+  <button mat-button color="primary">Supprimer</button>
+</form>

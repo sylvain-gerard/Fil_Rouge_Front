@@ -17,7 +17,7 @@ const appRoutes: Routes = [
   { path: 'suspect', component: SuspectComponent },
   { path: 'arme', component: ArmeComponent },
   { path: 'vehicule', component: VehiculeComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'supervision', component: AdminComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '**', component: AccueilComponent}
 ];

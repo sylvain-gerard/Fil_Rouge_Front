@@ -7,7 +7,7 @@ export class SidenavService {
 
   constructor() {}
 
-  toggleNav() {
+  toggleNav(etat:boolean) {
     this.sideNav=!this.sideNav;
   }
 }
