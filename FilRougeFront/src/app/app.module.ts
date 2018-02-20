@@ -15,7 +15,8 @@ import {
   MatFormFieldModule,
   MatTableModule,
   MatNativeDateModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  MatListModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -62,6 +63,7 @@ import { SidenavService } from './sidenav.service';
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatListModule,
     AppRoutingModule
   ],
   providers: [SidenavService],

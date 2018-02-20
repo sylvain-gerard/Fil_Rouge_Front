@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SidenavService {
-  sideNav: any = false;
+  sideNav: any;
 
 
   constructor() {}
 
-  toggleNav(etat:boolean) {
-    this.sideNav=!this.sideNav;
+  toggleNav() {
+    this.sideNav.toggle();
+    console.log(this.sideNav);
   }
 }

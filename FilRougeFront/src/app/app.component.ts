@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import {SidenavService} from './sidenav.service';
 
 @Component({
@@ -6,8 +6,16 @@ import {SidenavService} from './sidenav.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  @ViewChild('sideNav') public sideNav;
   title = 'MCPD';
   
-  constructor (public sideNavService: SidenavService){}
+  constructor (public sideNavService: SidenavService){
+    
+  }
+
+  ngOnInit() {
+    this.sideNavService.sideNav=this.sideNav;
+    console.log(this.sideNav);
+  }
 }

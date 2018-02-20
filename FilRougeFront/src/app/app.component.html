@@ -1,6 +1,6 @@
 
 <mat-sidenav-container mode="over" fullscreen>
-    <mat-sidenav opened="{{sideNavService.sideNav}}">
+    <mat-sidenav #sideNav opened="false">
         <app-menu></app-menu>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -11,9 +11,7 @@
                             <div>
                                 <button mat-button routerLink="/supervision"><mat-icon>settings</mat-icon></button>
                                 <button mat-button (click)="sideNavService.toggleNav()"><mat-icon>exit_to_app</mat-icon></button>
-                            </div>
-                            
-                                            
+                            </div>           
                 </mat-toolbar>
             <app-body fxFlex="1"></app-body> <!--mettre un ngIf lorsqu'il y aura le module de connection en Oath2-->
             <app-footer></app-footer> 

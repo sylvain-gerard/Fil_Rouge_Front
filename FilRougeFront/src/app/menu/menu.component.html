@@ -6,10 +6,10 @@
   <h2>MCPD</h2>
 </div>
 
-<div fxLayout="column" layout-align="center">
-  <button class="aCliquable" routerLink="/affaire" (click)="sideNavService.toggleNav()"><h3>Affaires</h3></button>
-  <button class="aCliquable" routerLink="/suspect" (click)="sideNavService.toggleNav()"><h3>Suspects</h3></button>
-  <button class="aCliquable" routerLink="/arme" (click)="sideNavService.toggleNav()"><h3>Armes</h3></button>
-  <button class="aCliquable" routerLink="/vehicule" (click)="sideNavService.toggleNav()"><h3>Véhicules</h3></button>
-</div>
+<mat-nav-list>
+  <a href="" routerLink="/affaire" (click)="sideNavService.toggleNav()"><h3>Affaires</h3></a>
+  <a href="" routerLink="/suspect" (click)="sideNavService.toggleNav()"><h3>Suspects</h3></a>
+  <a href="" routerLink="/arme" (click)="sideNavService.toggleNav()"><h3>Armes</h3></a>
+  <a href="" routerLink="/vehicule" (click)="sideNavService.toggleNav()"><h3>Véhicules</h3></a>
+</mat-nav-list>
 
