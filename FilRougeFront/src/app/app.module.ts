@@ -15,7 +15,6 @@ import {
   MatFormFieldModule,
   MatTableModule,
   MatNativeDateModule,
-  MatDatepickerModule,
   MatListModule,
 } from '@angular/material';
 
@@ -31,6 +30,10 @@ import { VehiculeComponent } from './vehicule/vehicule.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { SidenavService } from './sidenav.service';
+import { AffaireListComponent } from './affaire-list/affaire-list.component';
+import { ApiService } from './api.service';
+import { AffaireService } from './affaire.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -45,6 +48,7 @@ import { SidenavService } from './sidenav.service';
     ArmeComponent,
     VehiculeComponent,
     AdminComponent,
+    AffaireListComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,12 +65,12 @@ import { SidenavService } from './sidenav.service';
     MatSelectModule,
     MatFormFieldModule,
     MatTableModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MatListModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [SidenavService],
+  providers: [SidenavService, ApiService, AffaireService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

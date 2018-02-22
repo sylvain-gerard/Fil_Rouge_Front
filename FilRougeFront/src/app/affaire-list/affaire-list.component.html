@@ -1,0 +1,31 @@
+<!-- <div class="filtreTableAgent mat-elevation-z8"> -->
+  <div class="filtreTableAffaire">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+    </mat-form-field>
+  </div>
+
+  <mat-table class="filtreTableAffaire" #table [dataSource]="affaires">
+
+    <!-- Nom Column -->
+    <ng-container matColumnDef="nom_affaire">
+        <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+        <mat-cell *matCellDef="let affaire"> {{affaire.nom}} </mat-cell>
+      </ng-container>
+
+    <!-- Date Creation Column -->
+    <ng-container matColumnDef="date_creation">
+      <mat-header-cell *matHeaderCellDef> Création </mat-header-cell>
+      <mat-cell *matCellDef="let affaire"> {{affaire.date_creation}} </mat-cell>
+    </ng-container>
+
+    <!-- Clos Column -->
+    <ng-container matColumnDef="date_cloture">
+      <mat-header-cell *matHeaderCellDef> Classé le </mat-header-cell>
+      <mat-cell *matCellDef="let affaire"> {{affaire.date_cloture}} </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
