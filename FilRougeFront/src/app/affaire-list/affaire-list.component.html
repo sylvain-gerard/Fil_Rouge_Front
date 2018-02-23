@@ -1,4 +1,3 @@
-<!-- <div class="filtreTableAgent mat-elevation-z8"> -->
   <div class="filtreTableAffaire">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
@@ -10,7 +9,7 @@
     <!-- Nom Column -->
     <ng-container matColumnDef="nom_affaire">
         <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
-        <mat-cell *matCellDef="let affaire"> {{affaire.nom}} </mat-cell>
+        <mat-cell *matCellDef="let affaire"> {{affaire.nom_affaire}} </mat-cell>
       </ng-container>
 
     <!-- Date Creation Column -->
@@ -27,5 +26,40 @@
 
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.nom_affaire}" (click)="highlight(row)"></mat-row>
   </mat-table>
+
+  <br>
+<form #affaireForm="ngForm" (ngSubmit)="onSubmit(affaireForm)">
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Nom" required name="nom_affaire" [(ngModel)]="aff.nom_affaire">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput type="date" placeholder="Date de création" name="date_creation" [(ngModel)]="aff.date_creation"> 
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth"> 
+    <input matInput type="date" placeholder="Classée le :" name="date_cloture" [(ngModel)]="aff.date_cloture"> 
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <textarea matInput placeholder="Infos relatives à l'affaire."></textarea>
+  </mat-form-field>
+
+  <br>
+
+  <mat-checkbox name="classee" [(ngModel)]="aff.classee">Clore l'affaire</mat-checkbox>
+
+  <br>
+  <br>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!affaireForm.valid">Ajouter</button>
+</form>
+
+<br>
+<button mat-raised-button color="primary" (click)="cancelSelect()">Effacer</button>
+  <button mat-raised-button color="primary">Supprimer</button>

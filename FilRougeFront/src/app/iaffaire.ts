@@ -4,10 +4,10 @@ import { Isuspect } from "./isuspect";
 
 export interface Iaffaire {
 
-    id_affaire:number;
+    id_affaire?:number;
     nom_affaire:string;
-    date_creation:string;
-    date_cloture:string;
+    date_creation:any;
+    date_cloture?:any;
     vehicule:Ivehicule[];
     arme:Iarme[];
     suspect:Isuspect[];

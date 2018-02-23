@@ -34,6 +34,7 @@ import { AffaireListComponent } from './affaire-list/affaire-list.component';
 import { ApiService } from './api.service';
 import { AffaireService } from './affaire.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatListModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [SidenavService, ApiService, AffaireService],
