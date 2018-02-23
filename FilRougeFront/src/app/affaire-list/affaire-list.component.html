@@ -26,7 +26,7 @@
 
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.nom_affaire}" (click)="highlight(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id_affaire}" (click)="highlight(row)"></mat-row>
   </mat-table>
 
   <br>
@@ -62,4 +62,5 @@
 
 <br>
 <button mat-raised-button color="primary" (click)="cancelSelect()">Effacer</button>
-  <button mat-raised-button color="primary">Supprimer</button>
+  <button mat-raised-button color="primary" (click)="deleteAffaire()">Supprimer</button>
+  <br>

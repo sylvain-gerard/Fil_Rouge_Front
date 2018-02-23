@@ -15,14 +15,6 @@ export class ApiService {
 
   getAffaires() {
     return this.http.get<Iaffaire[]>(`${this.URL}/affaires`)
-    // .pipe(
-    //   map((affaires:Iaffaire[]) => {
-    //     return affaires.map((affaire : Iaffaire) => {
-    //       this.transformeToDate(affaire);
-    //       return affaire;
-    //     })
-    //   })
-    // );
   }
 
   updateAffaire(affaire: Iaffaire){
@@ -34,21 +26,9 @@ export class ApiService {
     if (affaire.id_affaire==null){
       return this.http.post<Iaffaire>(`${this.URL}/affaires`, affaire)    
   }
+  }
 
-//   transformeToDate(affaire: Iaffaire){
-//       affaire.date_creation = new Date(affaire.date_creation);
-//       if (affaire.date_cloture){
-//         affaire.date_cloture = new Date(affaire.date_cloture);
-//       }
-//       return affaire;
-//   }
-
-//   transformeToTimestamp(affaire: Iaffaire){
-//     affaire.date_creation = affaire.date_creation.getTime();
-//     if (affaire.date_cloture!=0){
-//       affaire.date_cloture = affaire.date_cloture.getTime();
-//     }
-//     return affaire;
-// }
-
+  deleteAffaire(id){
+    return this.http.delete<any>(`${this.URL}/affaire/${id}`)
+  }
 }

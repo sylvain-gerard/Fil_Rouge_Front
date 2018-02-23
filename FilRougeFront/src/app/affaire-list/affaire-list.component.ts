@@ -11,7 +11,7 @@ import { AffaireService } from '../affaire.service';
 export class AffaireListComponent implements OnInit {
   affaires: Iaffaire[];
   aff: Iaffaire;
-  selectedRowIndex: string ="";
+  selectedRowIndex: number =-1;
 
   constructor(private affaireService: AffaireService) {}
 
@@ -26,6 +26,7 @@ export class AffaireListComponent implements OnInit {
 
   ngOnInit() {
     this.aff = {
+      id_affaire:null,
       nom_affaire:'',
       date_creation:null,
       vehicule:[],
@@ -38,7 +39,7 @@ export class AffaireListComponent implements OnInit {
 
     this.refreshTab();
 
-    this.affaireService.created$.subscribe(()=>this.refreshTab());
+    this.affaireService.update$.subscribe(()=>this.refreshTab());
     
   }
 
@@ -48,16 +49,29 @@ export class AffaireListComponent implements OnInit {
       console.log(this.affaires);
     });
   }
-  highlight(row){
-    // row={...row, date_creation:new Date(row.date_creation)};
 
-    this.selectedRowIndex = row.nom_affaire;
+
+  highlight(row){
+    this.selectedRowIndex = row.id_affaire;
+    console.log(row.id_affaire);
     this.aff=row;
-    console.log(row)
   }
 
   cancelSelect(){
-    this.selectedRowIndex="";
+    this.selectedRowIndex=-1
+    this.clearInput();
+  }
+
+  onSubmit(){
+    this.affaireService.createAffaire(this.aff).subscribe();
+  }
+
+  deleteAffaire(){
+    this.affaireService.deleteAffaires(this.aff.id_affaire).subscribe();
+    this.clearInput();
+  }
+
+  clearInput(){
     this.aff = {
       nom_affaire:'',
       date_creation:null,
@@ -67,9 +81,5 @@ export class AffaireListComponent implements OnInit {
       infos_affaire:'',
       classee:false
     }
-  }
-
-  onSubmit(){
-    this.affaireService.createAffaire(this.aff).subscribe();
   }
 }

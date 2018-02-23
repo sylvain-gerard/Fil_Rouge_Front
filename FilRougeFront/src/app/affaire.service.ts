@@ -7,20 +7,23 @@ import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AffaireService {
+  constructor(private api: ApiService) {}
 
-  constructor(private api:ApiService) { }
+  update$: Subject<any> = new Subject<any>();
 
-  created$:Subject<any>=new Subject<any>();
-  
-  selectedAffaire:Iaffaire;
+  selectedAffaire: Iaffaire;
 
   getAffaires(): Observable<Iaffaire[]> {
     return this.api.getAffaires() as Observable<Iaffaire[]>;
   }
 
-  createAffaire(affaire : Iaffaire): Observable<Iaffaire>{
-    return this.api.createAffaire(affaire).pipe(tap((data)=>this.created$.next())
-    )
+  createAffaire(affaire: Iaffaire): Observable<Iaffaire> {
+    return this.api
+      .createAffaire(affaire)
+      .pipe(tap(data => this.update$.next()));
   }
+
+  deleteAffaires(id){
+    return this.api.deleteAffaire(id).pipe(tap(data=> this.update$.next()))
   }
-    
+}
