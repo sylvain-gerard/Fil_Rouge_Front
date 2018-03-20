@@ -17,6 +17,10 @@ export class AffaireService {
     return this.api.getAffaires() as Observable<Iaffaire[]>;
   }
 
+  updateAffaire(affaire:Iaffaire): Observable<Iaffaire>{
+    return this.api.updateAffaire(affaire.id_affaire, affaire).pipe(tap(data => this.update$.next()));
+  }
+
   createAffaire(affaire: Iaffaire): Observable<Iaffaire> {
     return this.api
       .createAffaire(affaire)

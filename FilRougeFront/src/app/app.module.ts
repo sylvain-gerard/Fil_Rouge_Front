@@ -16,6 +16,7 @@ import {
   MatTableModule,
   MatNativeDateModule,
   MatListModule,
+  MatDialogModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -35,6 +36,8 @@ import { ApiService } from './api.service';
 import { AffaireService } from './affaire.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AjouterArmeAaffaireComponent } from './ajouter-arme-aaffaire/ajouter-arme-aaffaire.component';
+import { ArmesService } from './armes.service';
 
 
 @NgModule({
@@ -50,6 +53,7 @@ import { FormsModule } from '@angular/forms';
     VehiculeComponent,
     AdminComponent,
     AffaireListComponent,
+    AjouterArmeAaffaireComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,9 +74,11 @@ import { FormsModule } from '@angular/forms';
     MatListModule,
     AppRoutingModule,
     FormsModule,
+    MatDialogModule,
     HttpClientModule
   ],
-  providers: [SidenavService, ApiService, AffaireService],
-  bootstrap: [AppComponent]
+  providers: [SidenavService, ApiService, AffaireService, ArmesService],
+  bootstrap: [AppComponent],
+  entryComponents:[AjouterArmeAaffaireComponent]
 })
 export class AppModule { }

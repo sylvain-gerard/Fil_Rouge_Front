@@ -1,10 +1,11 @@
+<div>
   <div class="filtreTableAffaire">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
     </mat-form-field>
   </div>
 
-  <mat-table class="filtreTableAffaire" #table [dataSource]="affaires">
+  <mat-table class="filtreTableAffaire" #table [dataSource]="dataSourceAffaire">
 
     <!-- Nom Column -->
     <ng-container matColumnDef="nom_affaire">
@@ -28,7 +29,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id_affaire}" (click)="highlight(row)"></mat-row>
   </mat-table>
-
+</div>
   <br>
 <form #affaireForm="ngForm" (ngSubmit)="onSubmit(affaireForm)">
   <mat-form-field class="inputFullWidth">
@@ -47,7 +48,7 @@
 
   <br>
   <mat-form-field class="inputFullWidth">
-    <textarea matInput placeholder="Infos relatives à l'affaire."></textarea>
+    <textarea matInput matTextareaAutosize placeholder="Infos relatives à l'affaire."></textarea>
   </mat-form-field>
 
   <br>
@@ -57,9 +58,14 @@
   <br>
   <br>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="!affaireForm.valid">Ajouter</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!affaireForm.valid">{{edition ? 'Modifier' : 'Créer'}}</button>
 </form>
 
+<br>
+<button mat-raised-button color="primary" (click)="ajouterArmeAAffaire()">Ajouter Armes à l'affaire</button>
+<button mat-raised-button color="primary" >Armes de l'affaire</button>
+
+<br>
 <br>
 <button mat-raised-button color="primary" (click)="cancelSelect()">Effacer</button>
   <button mat-raised-button color="primary" (click)="deleteAffaire()">Supprimer</button>

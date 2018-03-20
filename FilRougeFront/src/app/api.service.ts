@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Iaffaire } from './iaffaire';
 import {map} from 'rxjs/operators';
+import { Iarme } from './iarme';
 
 @Injectable()
 export class ApiService {
@@ -17,9 +18,8 @@ export class ApiService {
     return this.http.get<Iaffaire[]>(`${this.URL}/affaires`)
   }
 
-  updateAffaire(affaire: Iaffaire){
-    
-    
+  updateAffaire(id, affaire: Iaffaire){
+    return this.http.put<Iaffaire>(`${this.URL}/affaire/${id}`, affaire)
   }
 
   createAffaire(affaire:Iaffaire){
@@ -30,5 +30,9 @@ export class ApiService {
 
   deleteAffaire(id){
     return this.http.delete<any>(`${this.URL}/affaire/${id}`)
+  }
+
+  getArmes(){
+    return this.http.get<Iarme[]>(`${this.URL}/armes`)
   }
 }
