@@ -4,6 +4,7 @@ import { MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/materia
 import { AffaireService } from '../affaire.service';
 import { AjouterArmeAaffaireComponent } from '../ajouter-arme-aaffaire/ajouter-arme-aaffaire.component';
 import { ArmesService } from '../armes.service';
+import { Iarme } from '../iarme';
 
 @Component({
   selector: 'app-affaire-list',
@@ -12,6 +13,7 @@ import { ArmesService } from '../armes.service';
 })
 export class AffaireListComponent implements OnInit {
   aff: Iaffaire;
+  armes:Iarme[];
   selectedRowIndex: number =-1;
   edition:boolean=false;
 
@@ -40,6 +42,8 @@ export class AffaireListComponent implements OnInit {
 
 
     this.refreshTab();
+
+    this.armeService.getArmes().subscribe(armes=>this.armes=armes);
 
     this.affaireService.update$.subscribe(()=>this.refreshTab());
     
@@ -98,7 +102,6 @@ export class AffaireListComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     
-    this.dialog.open(AjouterArmeAaffaireComponent,{data : {armes:this.armeService.getArmes().subscribe()}})
-    console.log()
+    this.dialog.open(AjouterArmeAaffaireComponent,{data : this.armes})
   }
 }

@@ -53,7 +53,7 @@
 
   <br>
 
-  <mat-checkbox name="classee" [(ngModel)]="aff.classee">Clore l'affaire</mat-checkbox>
+  <mat-slide-toggle name="classee" [(ngModel)]="aff.classee">{{aff.classee ? 'Affaire classée' : 'Classer l\'affaire'}}</mat-slide-toggle>
 
   <br>
   <br>

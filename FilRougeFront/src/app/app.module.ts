@@ -17,6 +17,7 @@ import {
   MatNativeDateModule,
   MatListModule,
   MatDialogModule,
+  MatSlideToggleModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -75,6 +76,7 @@ import { ArmesService } from './armes.service';
     AppRoutingModule,
     FormsModule,
     MatDialogModule,
+    MatSlideToggleModule,
     HttpClientModule
   ],
   providers: [SidenavService, ApiService, AffaireService, ArmesService],
