@@ -33,3 +33,7 @@
     overflow: auto;
     max-height: 500px;
 }
+
+.highlight{
+    background:  #2BA09E;
+  }

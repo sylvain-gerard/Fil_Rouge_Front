@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AccueilComponent } from './accueil/accueil.component';
 import { SuspectComponent } from './suspect/suspect.component';
-import { AffaireComponent } from './affaire/affaire.component';
+//import { AffaireComponent } from './affaire/affaire.component';
 import { ArmeComponent } from './arme/arme.component';
 import { VehiculeComponent } from './vehicule/vehicule.component';
 import { AdminComponent } from './admin/admin.component';

@@ -18,6 +18,7 @@ import {
   MatListModule,
   MatDialogModule,
   MatSlideToggleModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -26,7 +27,7 @@ import { BodyComponent } from './body/body.component';
 import { MenuComponent } from './menu/menu.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { SuspectComponent } from './suspect/suspect.component';
-import { AffaireComponent } from './affaire/affaire.component';
+// import { AffaireComponent } from './affaire/affaire.component';
 import { ArmeComponent } from './arme/arme.component';
 import { VehiculeComponent } from './vehicule/vehicule.component';
 import { AdminComponent } from './admin/admin.component';
@@ -39,7 +40,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AjouterArmeAaffaireComponent } from './ajouter-arme-aaffaire/ajouter-arme-aaffaire.component';
 import { ArmesService } from './armes.service';
-
+import { UtilisateurService } from './utilisateur.service';
+import { SuspectService } from './suspect.service';
+import { VehiculeService } from './vehicule.service';
+import { AjouterSuspectAffaireComponent } from './ajouter-suspect-affaire/ajouter-suspect-affaire.component';
+import { AjouterVehiculeAffaireComponent } from './ajouter-vehicule-affaire/ajouter-vehicule-affaire.component';
+import { VehiculeAffaireComponent } from './vehicule-affaire/vehicule-affaire.component';
+import { SuspectAffaireComponent } from './suspect-affaire/suspect-affaire.component';
+import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
 
 @NgModule({
   declarations: [
@@ -49,12 +57,17 @@ import { ArmesService } from './armes.service';
     MenuComponent,
     AccueilComponent,
     SuspectComponent,
-    AffaireComponent,
+    // AffaireComponent,
     ArmeComponent,
     VehiculeComponent,
     AdminComponent,
     AffaireListComponent,
     AjouterArmeAaffaireComponent,
+    AjouterSuspectAffaireComponent,
+    AjouterVehiculeAffaireComponent,
+    VehiculeAffaireComponent,
+    SuspectAffaireComponent,
+    ArmeAffaireComponent
   ],
   imports: [
     BrowserModule,
@@ -77,10 +90,26 @@ import { ArmesService } from './armes.service';
     FormsModule,
     MatDialogModule,
     MatSlideToggleModule,
+    MatTooltipModule,
     HttpClientModule
   ],
-  providers: [SidenavService, ApiService, AffaireService, ArmesService],
+  providers: [
+    SidenavService,
+    ApiService,
+    AffaireService,
+    ArmesService,
+    UtilisateurService,
+    SuspectService,
+    VehiculeService
+  ],
   bootstrap: [AppComponent],
-  entryComponents:[AjouterArmeAaffaireComponent]
+  entryComponents: [
+    AjouterArmeAaffaireComponent,
+    ArmeAffaireComponent,
+    AjouterSuspectAffaireComponent,
+    SuspectAffaireComponent,
+    AjouterVehiculeAffaireComponent,
+    VehiculeAffaireComponent
+  ]
 })
-export class AppModule { }
+export class AppModule {}

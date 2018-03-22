@@ -9,9 +9,9 @@
 
     <!-- Nom Column -->
     <ng-container matColumnDef="nom_affaire">
-        <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
-        <mat-cell *matCellDef="let affaire"> {{affaire.nom_affaire}} </mat-cell>
-      </ng-container>
+      <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let affaire"> {{affaire.nom_affaire}} </mat-cell>
+    </ng-container>
 
     <!-- Date Creation Column -->
     <ng-container matColumnDef="date_creation">
@@ -30,7 +30,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id_affaire}" (click)="highlight(row)"></mat-row>
   </mat-table>
 </div>
-  <br>
+<br>
 <form #affaireForm="ngForm" (ngSubmit)="onSubmit(affaireForm)">
   <mat-form-field class="inputFullWidth">
     <input matInput placeholder="Nom" required name="nom_affaire" [(ngModel)]="aff.nom_affaire">
@@ -38,17 +38,17 @@
 
   <br>
   <mat-form-field class="inputFullWidth">
-    <input matInput type="date" placeholder="Date de création" name="date_creation" [(ngModel)]="aff.date_creation"> 
-  </mat-form-field>
-
-  <br>
-  <mat-form-field class="inputFullWidth"> 
-    <input matInput type="date" placeholder="Classée le :" name="date_cloture" [(ngModel)]="aff.date_cloture"> 
+    <input matInput type="date" placeholder="Date de création" name="date_creation" [(ngModel)]="aff.date_creation">
   </mat-form-field>
 
   <br>
   <mat-form-field class="inputFullWidth">
-    <textarea matInput matTextareaAutosize placeholder="Infos relatives à l'affaire."></textarea>
+    <input matInput type="date" placeholder="Classée le :" name="date_cloture" [(ngModel)]="aff.date_cloture">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <textarea matInput matTextareaAutosize placeholder="Infos relatives à l'affaire." name="infos_affaire" [(ngModel)]="aff.infos_affaire"></textarea>
   </mat-form-field>
 
   <br>
@@ -62,11 +62,20 @@
 </form>
 
 <br>
-<button mat-raised-button color="primary" (click)="ajouterArmeAAffaire()">Ajouter Armes à l'affaire</button>
-<button mat-raised-button color="primary" >Armes de l'affaire</button>
+<button mat-raised-button (click)="ajouterArmeAAffaire()">Ajouter Armes à l'affaire</button>
+<button class="mat-raised-button mat-primary" (click)="armeDelAffaire()">Armes de l'affaire</button>
 
 <br>
 <br>
-<button mat-raised-button color="primary" (click)="cancelSelect()">Effacer</button>
-  <button mat-raised-button color="primary" (click)="deleteAffaire()">Supprimer</button>
-  <br>
+<button mat-raised-button (click)="ajoutSuspectsAffaire()">Ajouter Suspects à l'affaire</button>
+<button class="mat-raised-button mat-primary" (click)="supectDelAffaire()">Suspects de l'affaire</button>
+<br>
+<br>
+<button mat-raised-button (click)="ajouterVehiculesAffaire()">Ajouter Véhicules à l'affaire</button>
+<button class="mat-raised-button mat-primary" (click)="vehiculeDelAffaire()">Véhicules de l'affaire</button>
+
+<br>
+<br>
+<button mat-raised-button (click)="cancelSelect()">Effacer</button>
+<button mat-raised-button (click)="deleteAffaire()">Supprimer</button>
+<br>

@@ -1,11 +1,11 @@
-<!-- <div class="filtreTableAgent mat-elevation-z8"> -->
+<div>
   <div class="filtreTableAgent">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
     </mat-form-field>
   </div>
 
-  <mat-table class="filtreTableAgent" #table [dataSource]="dataSource">
+  <mat-table class="filtreTableAgent" #table [dataSource]="dataSourceUser">
     <!-- Nom Column -->
     <ng-container matColumnDef="nom">
       <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
@@ -37,37 +37,38 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"[ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></mat-row>
   </mat-table>
-<!-- </div> -->
+</div>
 
-<form class="adminForm">
+<form #adminForm="ngForm" (ngSubmit)="onSubmit(adminForm)">
   <mat-form-field class="inputFullWidth">
-    <input matInput placeholder="Nom">
+    <input matInput placeholder="Nom" required name="user_nom" [(ngModel)]="user.nom">
   </mat-form-field>
 
   <mat-form-field class="inputFullWidth">
-    <input matInput placeholder="Prénom">
+    <input matInput placeholder="Prénom" required name="user_prenom" [(ngModel)]="user.prenom">
   </mat-form-field>
 
   <mat-form-field class="inputFullWidth">
-    <input matInput placeholder="Matricule">
+    <input matInput placeholder="Matricule" required name="user_matricule" [(ngModel)]="user.matricule">
   </mat-form-field>
 
   <mat-form-field class="inputFullWidth">
-    <input matInput placeholder="Mot de passe">
+    <input matInput placeholder="Mot de passe" required name="user_password" [(ngModel)]="user.password">
   </mat-form-field>
 
   <mat-form-field class="inputFullWidth">
-    <mat-select placeholder="Habilitation">
+    <mat-select placeholder="Habilitation" required name="habilitation_agent" [(ngModel)]="user.habilitation">
       <mat-option *ngFor="let habilitation of habilitations" [value]="habilitation.value">
         {{ habilitation.viewValue }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-    <button mat-raised-button color="primary">Ajouter</button>
-    <button mat-raised-button color="primary">Modifier</button>
-    <button mat-raised-button color="primary">Supprimer</button>
-</form>
+    <button class="mat-raised-button mat-primary" type="submit" [disabled]="!adminForm.valid">{{edition ? 'Modifier' : 'Créer'}}</button>
+    </form>
 
+    <br>
+    <button mat-raised-button (click)="cancelSelect()">Effacer</button>
+    <button mat-raised-button (click)="deleteAgent()">Supprimer</button>

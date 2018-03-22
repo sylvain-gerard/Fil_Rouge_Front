@@ -1,51 +1,87 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import { BddAgent } from '../bddagent';
+import { Iutilisateur } from '../iutilisateur';
+import { UtilisateurService } from '../utilisateur.service';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit{
+  users:Iutilisateur[];
+  user:Iutilisateur;
+  selectedRowIndex: number= -1;
+  edition:boolean=false;
+ 
+  constructor(private utilisateurService:UtilisateurService){}
 
   displayedColumns = ['nom', 'prenom', 'matricule', 'password', 'habilitation'];
-  dataSource = new MatTableDataSource(AGENT_BDD);
+  dataSourceUser = new MatTableDataSource();
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    this.dataSourceUser.filter = filterValue;
   }
 
   habilitations = [
-    {value: 'admin-0', viewValue: 'Admin'},
-    {value: 'inspecteur-1', viewValue: 'Inspecteur'},
-    {value: 'sergent-2', viewValue: 'Sergent'},
-    {value: 'agent-3', viewValue: 'Agent'}
+    {value: 'ADMIN', viewValue: 'Admin'},
+    {value: 'INSPECTEUR', viewValue: 'Inspecteur'},
+    {value: 'SERGENT', viewValue: 'Sergent'},
+    {value: 'AGENT', viewValue: 'Agent'}
   ];
 
-}
+  ngOnInit(){
+    this.clearInput();
 
-const AGENT_BDD: BddAgent[] = [
-  {nom:'Hydrogen', prenom: 'H', matricule:123, password:'a', habilitation:'Agent'},
-  {nom:'Helium', prenom: 'He', matricule:123, password:'a', habilitation:'Agent'},
-  {nom:'Lithium', prenom: 'Li', matricule:123, password:'a', habilitation:'Sergent'},
-  {nom:'Beryllium', prenom: 'Be', matricule:123, password:'a', habilitation:'Inspecteur'},
-  {nom:'Boron', prenom: 'B', matricule:123, password:'a', habilitation:'Admin'},
-  {nom:'Carbon', prenom: 'C', matricule:123, password:'a', habilitation:'Sergent'},
-  {nom:'Nitrogen', prenom: 'N', matricule:123, password:'a', habilitation:'Admin'},
-  {nom:'Oxygen', prenom: 'O', matricule:123, password:'a', habilitation:'Agent'},
-  {nom:'Fluorine', prenom: 'F', matricule:123, password:'a', habilitation:'Inspecteur'},
-  {nom: 'Neon', prenom: 'Ne', matricule:123, password:'a', habilitation:'Agent'},
-  {nom: 'Sodium', prenom: 'Na', matricule:123, password:'a', habilitation:'Agent'},
-  {nom: 'Magnesium', prenom: 'Mg', matricule:123, password:'a', habilitation:'Agent'},
-  {nom: 'Aluminum', prenom: 'Al', matricule:123, password:'a', habilitation:'Sergent'},
-  {nom: 'Silicon', prenom: 'Si', matricule:123, password:'a', habilitation:'Sergent'},
-  {nom: 'Phosphorus', prenom: 'P', matricule:123, password:'a', habilitation:'Inspecteur'},
-  {nom: 'Sulfur', prenom: 'S', matricule:123, password:'a', habilitation:'Agent'},
-  {nom: 'Chlorine', prenom: 'Cl', matricule:123, password:'a', habilitation:'Sergent'},
-  {nom: 'Argon', prenom: 'Ar', matricule:123, password:'a', habilitation:'Agent'},
-  {nom: 'Potassium', prenom: 'K', matricule:123, password:'a', habilitation:'Agent'},
-  {nom: 'Calcium', prenom: 'Ca', matricule:123, password:'a', habilitation:'Inspecteur'},
-];
+    this.refreshTab();
+
+    this.utilisateurService.updateUser$.subscribe(()=>this.refreshTab());
+  }
+
+  refreshTab(){
+    this.utilisateurService.getUsers().subscribe((data: Iutilisateur[])=>{
+      this.dataSourceUser=new MatTableDataSource(data);
+    })
+  }
+
+  highlight(row){
+    this.selectedRowIndex = row.id;
+    console.log(row.id);
+    this.edition=true;
+    this.user=Object.assign({},row);
+  }
+
+  onSubmit(){
+    if(this.edition){
+      this.utilisateurService.updateUser(this.user).subscribe();
+    } else {
+      this.utilisateurService.createUser(this.user).subscribe();
+    }
+  }
+
+  cancelSelect(){
+    this.selectedRowIndex=-1;
+    this.edition=false;
+    this.clearInput();
+  }
+
+  clearInput(){
+    this.user={
+      id:0,
+      nom:'',
+      prenom:'',
+      matricule:'',
+      password:'',
+      habilitation:''
+    }
+  }
+
+  deleteAgent(){
+    this.edition=false;
+    this.utilisateurService.deleteUser(this.user.id).subscribe();
+    this.clearInput();
+  }
+}

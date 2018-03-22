@@ -1,14 +1,48 @@
 <h2 mat-dialog-title>Ajout d'armes à l'affaire</h2>
 
 <mat-dialog-content>
-  
-  <mat-form-field>
-      <input matInput placeholder="Course Description">
-  </mat-form-field>
+
+  <div>
+    <div class="filtreTableArmes">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+      </mat-form-field>
+    </div>
+
+    <mat-table class="filtreTableArmes" #table [dataSource]="dataSourceArmes">
+
+      <!-- Type Column -->
+      <ng-container matColumnDef="type_arme">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let arme"> {{arme.type}} </mat-cell>
+      </ng-container>
+
+      <!-- Marque Column -->
+      <ng-container matColumnDef="marque_arme">
+        <mat-header-cell *matHeaderCellDef> Marque </mat-header-cell>
+        <mat-cell *matCellDef="let arme"> {{arme.marque}} </mat-cell>
+      </ng-container>
+
+      <!-- Modele Column -->
+      <ng-container matColumnDef="modele_arme">
+        <mat-header-cell *matHeaderCellDef> Modèle </mat-header-cell>
+        <mat-cell *matCellDef="let arme"> {{arme.modele}} </mat-cell>
+      </ng-container>
+
+      <!-- Numero Serie Column -->
+      <ng-container matColumnDef="numero_serie_arme">
+        <mat-header-cell *matHeaderCellDef> N° série </mat-header-cell>
+        <mat-cell *matCellDef="let arme"> {{arme.numero_serie}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></mat-row>
+    </mat-table>
+  </div>
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button">Close</button>
-  <button class="mat-raised-button mat-primary">Save</button>
+  <button class="mat-raised-button mat-primary" [disabled]="!selectedArme" (click)="addArmeToAffaire()">Ajouter</button>
+  <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
 </mat-dialog-actions>

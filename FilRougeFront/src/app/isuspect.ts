@@ -11,4 +11,5 @@ export interface Isuspect {
     taille:number;
     sexe:string;
     signes_particuliers:string;
+    matricule:string;
 }

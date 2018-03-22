@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>Ajout de suspects à l'affaire</h2>
+
+<mat-dialog-content>
+
+  <div>
+    <div class="filtreTableSuspects">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+      </mat-form-field>
+    </div>
+
+    <mat-table class="filtreTableSuspects" #table [dataSource]="dataSourceSuspects">
+
+      <!-- Matricule Column -->
+      <ng-container matColumnDef="matricule_suspect">
+        <mat-header-cell *matHeaderCellDef> Matricule </mat-header-cell>
+        <mat-cell *matCellDef="let suspect"> {{suspect.matricule}} </mat-cell>
+      </ng-container>
+
+      <!-- Nom Column -->
+      <ng-container matColumnDef="nom_suspect">
+        <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+        <mat-cell *matCellDef="let suspect"> {{suspect.nom}} </mat-cell>
+      </ng-container>
+
+      <!-- Prenom Column -->
+      <ng-container matColumnDef="prenom_suspect">
+        <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+        <mat-cell *matCellDef="let suspect"> {{suspect.prenom}} </mat-cell>
+      </ng-container>
+
+      <!-- Sexe Column -->
+      <ng-container matColumnDef="sexe_suspect">
+        <mat-header-cell *matHeaderCellDef> Sexe </mat-header-cell>
+        <mat-cell *matCellDef="let suspect"> {{suspect.sexe}} </mat-cell>
+      </ng-container>
+
+      <!-- Date Naissance Column -->
+      <ng-container matColumnDef="date_naissance_suspect">
+        <mat-header-cell *matHeaderCellDef> Date Naissance </mat-header-cell>
+        <mat-cell *matCellDef="let suspect"> {{suspect.date_naissance}} </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></mat-row>
+    </mat-table>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary" [disabled]="!selectedArme" (click)="addSuspectToAffaire()">Ajouter</button>
+  <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
+</mat-dialog-actions>

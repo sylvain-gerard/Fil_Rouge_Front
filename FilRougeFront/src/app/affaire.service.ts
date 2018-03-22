@@ -17,8 +17,10 @@ export class AffaireService {
     return this.api.getAffaires() as Observable<Iaffaire[]>;
   }
 
-  updateAffaire(affaire:Iaffaire): Observable<Iaffaire>{
-    return this.api.updateAffaire(affaire.id_affaire, affaire).pipe(tap(data => this.update$.next()));
+  updateAffaire(affaire: Iaffaire): Observable<Iaffaire> {
+    return this.api
+      .updateAffaire(affaire.id_affaire, affaire)
+      .pipe(tap(data => this.update$.next()));
   }
 
   createAffaire(affaire: Iaffaire): Observable<Iaffaire> {
@@ -27,7 +29,7 @@ export class AffaireService {
       .pipe(tap(data => this.update$.next()));
   }
 
-  deleteAffaires(id){
-    return this.api.deleteAffaire(id).pipe(tap(data=> this.update$.next()))
+  deleteAffaires(id) {
+    return this.api.deleteAffaire(id).pipe(tap(data => this.update$.next()));
   }
 }

@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { Subject } from 'rxjs/Subject';
+import { Isuspect } from './isuspect';
+import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
+
+@Injectable()
+export class SuspectService {
+
+  constructor(private api:ApiService) { }
+
+  update$: Subject<any> = new Subject<any>();
+  selectedSuspect: Isuspect;
+
+  getSuspects(): Observable<Isuspect[]> {
+    return this.api.getSuspects() as Observable<Isuspect[]>;
+  }
+
+  updateSuspect(suspect: Isuspect): Observable<Isuspect> {
+    return this.api
+      .updateSuspect(suspect.id, suspect)
+      .pipe(tap(data => this.update$.next()));
+  }
+
+  createSuspect(suspect: Isuspect): Observable<Isuspect> {
+    return this.api.createSuspect(suspect).pipe(tap(data => this.update$.next()));
+  }
+
+  deleteSuspect(id) {
+    return this.api.deleteSuspect(id).pipe(tap(data => this.update$.next()));
+  }
+}
