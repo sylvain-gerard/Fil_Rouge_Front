@@ -18,15 +18,24 @@ export class ArmeAffaireComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.data);
+    
     this.refreshList();
   }
 
   refreshList() {
-    this.armeService.getArmes().subscribe(data =>this.armes = data);
+    this.armeService.getAffaireArmes(this.data).subscribe(armes=>this.armes=armes)
   }
 
   closeDial(){
     this.dialogRef.close();
     console.log(this.armes)
+  }
+
+  test(){
+    if (this.armes.length>0){
+      return true
+    }
+    else{return false}
   }
 }

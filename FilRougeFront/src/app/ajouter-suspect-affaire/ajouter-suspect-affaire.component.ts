@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { SuspectService } from '../suspect.service';
 import {
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MatTableDataSource
+  MatTableDataSource,
+  MatSort
 } from '@angular/material';
 import { Isuspect } from '../isuspect';
 
@@ -33,6 +34,8 @@ export class AjouterSuspectAffaireComponent implements OnInit {
   ];
   dataSourceSuspects = new MatTableDataSource();
 
+  @ViewChild(MatSort) sort: MatSort;
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -46,6 +49,7 @@ export class AjouterSuspectAffaireComponent implements OnInit {
   refreshTab() {
     this.suspectService.getSuspects().subscribe((data: Isuspect[]) => {
       this.dataSourceSuspects = new MatTableDataSource(data);
+      this.dataSourceSuspects.sort=this.sort;
     });
   }
 
@@ -61,5 +65,9 @@ export class AjouterSuspectAffaireComponent implements OnInit {
 
   addSuspectToAffaire(){
     this.selectedSuspect=false;
+  }
+
+  rechercher(){
+
   }
 }

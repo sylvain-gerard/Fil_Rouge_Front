@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Iaffaire } from '../iaffaire';
 import {
   MatTableDataSource,
   MatDialog,
-  MatDialogConfig
+  MatDialogConfig,
+  MatSort
 } from '@angular/material';
 import { AffaireService } from '../affaire.service';
 import { AjouterArmeAaffaireComponent } from '../ajouter-arme-aaffaire/ajouter-arme-aaffaire.component';
@@ -14,6 +15,7 @@ import { SuspectAffaireComponent } from '../suspect-affaire/suspect-affaire.comp
 import { VehiculeAffaireComponent } from '../vehicule-affaire/vehicule-affaire.component';
 import { AjouterSuspectAffaireComponent } from '../ajouter-suspect-affaire/ajouter-suspect-affaire.component';
 import { AjouterVehiculeAffaireComponent } from '../ajouter-vehicule-affaire/ajouter-vehicule-affaire.component';
+
 
 @Component({
   selector: 'app-affaire-list',
@@ -34,6 +36,8 @@ export class AffaireListComponent implements OnInit {
 
   displayedColumns = ['nom_affaire', 'date_creation', 'date_cloture'];
   dataSourceAffaire = new MatTableDataSource();
+
+  @ViewChild(MatSort) sort: MatSort;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -58,15 +62,17 @@ export class AffaireListComponent implements OnInit {
     this.affaireService.update$.subscribe(() => this.refreshTab());
   }
 
-  refreshTab() {
-    this.affaireService.getAffaires().subscribe((data: Iaffaire[]) => {
+  async refreshTab() {
+    const toto = await this.affaireService.getAffaires().subscribe((data: Iaffaire[]) => {
       this.dataSourceAffaire = new MatTableDataSource(data);
+      this.dataSourceAffaire.sort = this.sort;
     });
+    console.log("1 ! + " + toto);
+    console.log("avant ?");
   }
 
   highlight(row) {
     this.selectedRowIndex = row.id_affaire;
-    console.log(row.id_affaire);
     this.aff = Object.assign({}, row);
     this.edition = true;
   }
@@ -78,6 +84,11 @@ export class AffaireListComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.aff.date_cloture<this.aff.date_creation && this.aff.date_cloture!=""){
+      console.log("ERROR Date Creation");
+      console.log(this.aff.date_cloture);
+      return
+    }
     if (this.edition) {
       this.affaireService.updateAffaire(this.aff).subscribe();
     } else {
@@ -108,7 +119,7 @@ export class AffaireListComponent implements OnInit {
   }
 
   armeDelAffaire(){
-    this.dialog.open(ArmeAffaireComponent, { width: '600px' });
+    this.dialog.open(ArmeAffaireComponent, { width: '600px', data : this.aff.id_affaire });
   }
 
   ajoutSuspectsAffaire(){

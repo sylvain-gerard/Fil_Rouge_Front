@@ -4,6 +4,7 @@ import { Iaffaire } from './iaffaire';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { tap } from 'rxjs/operators';
+import { Iarme } from './iarme';
 
 @Injectable()
 export class AffaireService {

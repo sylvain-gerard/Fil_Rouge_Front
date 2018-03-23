@@ -3,35 +3,42 @@
 <mat-dialog-content>
 
   <div>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Recherche" name="recherche">
+    </mat-form-field>
+      <button mat-raised-button (click)="rechercher()"><mat-icon>search</mat-icon></button>
+  </div>
+
+  <div>
     <div class="filtreTableArmes">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
       </mat-form-field>
     </div>
 
-    <mat-table class="filtreTableArmes" #table [dataSource]="dataSourceArmes">
+    <mat-table class="filtreTableArmes" #table [dataSource]="dataSourceArmes" matSort>
 
       <!-- Type Column -->
       <ng-container matColumnDef="type_arme">
-        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
         <mat-cell *matCellDef="let arme"> {{arme.type}} </mat-cell>
       </ng-container>
 
       <!-- Marque Column -->
       <ng-container matColumnDef="marque_arme">
-        <mat-header-cell *matHeaderCellDef> Marque </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Marque </mat-header-cell>
         <mat-cell *matCellDef="let arme"> {{arme.marque}} </mat-cell>
       </ng-container>
 
       <!-- Modele Column -->
       <ng-container matColumnDef="modele_arme">
-        <mat-header-cell *matHeaderCellDef> Modèle </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Modèle </mat-header-cell>
         <mat-cell *matCellDef="let arme"> {{arme.modele}} </mat-cell>
       </ng-container>
 
       <!-- Numero Serie Column -->
       <ng-container matColumnDef="numero_serie_arme">
-        <mat-header-cell *matHeaderCellDef> N° série </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> N° série </mat-header-cell>
         <mat-cell *matCellDef="let arme"> {{arme.numero_serie}} </mat-cell>
       </ng-container>
 

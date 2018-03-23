@@ -3,41 +3,48 @@
 <mat-dialog-content>
 
   <div>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Recherche" name="recherche">
+    </mat-form-field>
+      <button mat-raised-button (click)="rechercher()"><mat-icon>search</mat-icon></button>
+  </div>  
+
+  <div>
     <div class="filtreTableVehicules">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
       </mat-form-field>
     </div>
 
-    <mat-table class="filtreTableVehicules" #table [dataSource]="dataSourceVehicules">
+    <mat-table class="filtreTableVehicules" #table [dataSource]="dataSourceVehicules" matSort>
 
       <!-- Immatriculation Column -->
       <ng-container matColumnDef="immatriculation_vehicule">
-        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.immatriculation}} </mat-cell>
       </ng-container>
 
       <!-- Type Column -->
       <ng-container matColumnDef="type_vehicule">
-        <mat-header-cell *matHeaderCellDef> Marque </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Marque </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.type}} </mat-cell>
       </ng-container>
 
       <!-- Marque Column -->
       <ng-container matColumnDef="marque_vehicule">
-        <mat-header-cell *matHeaderCellDef> Modèle </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Modèle </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.marque}} </mat-cell>
       </ng-container>
 
       <!-- Modele Column -->
       <ng-container matColumnDef="modele_vehicule">
-        <mat-header-cell *matHeaderCellDef> N° série </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> N° série </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.modele}} </mat-cell>
       </ng-container>
 
       <!-- Couleur Column -->
       <ng-container matColumnDef="couleur_du_vehicule">
-        <mat-header-cell *matHeaderCellDef> N° série </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> N° série </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.couleur}} </mat-cell>
       </ng-container>
 

@@ -19,40 +19,44 @@ export class ApiService {
     return this.http.get<Iaffaire[]>(`${this.URL}/affaires`);
   }
 
+  
   updateAffaire(id, affaire: Iaffaire) {
     return this.http.put<Iaffaire>(`${this.URL}/affaire/${id}`, affaire);
   }
-
+  
   createAffaire(affaire: Iaffaire) {
     if (affaire.id_affaire == null) {
       return this.http.post<Iaffaire>(`${this.URL}/affaires`, affaire);
     }
   }
-
+  
   deleteAffaire(id) {
     return this.http.delete<any>(`${this.URL}/affaire/${id}`);
   }
-
+  
   getUsers() {
     return this.http.get<Iutilisateur[]>(`${this.URL}/utilisateurs`);
   }
-
+  
   updateUser(id, user: Iutilisateur) {
     return this.http.put<Iutilisateur>(`${this.URL}/utilisateur/${id}`, user);
   }
-
+  
   createUser(user: Iutilisateur) {
     return this.http.post<Iutilisateur>(`${this.URL}/utilisateurs`, user);
   }
-
+  
   deleteUser(id) {
     return this.http.delete<any>(`${this.URL}/utilisateur/${id}`);
   }
-
+  
   getArmes() {
     return this.http.get<Iarme[]>(`${this.URL}/armes`);
   }
-
+  
+  getArmesAffaire(id){
+    return this.http.get<Iarme[]>(`${this.URL}/affaire/${id}/armes`)
+  }
   updateArme(id, arme: Iarme) {
     return this.http.put<Iarme>(`${this.URL}/arme/${id}`, arme);
   }

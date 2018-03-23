@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Ivehicule } from '../ivehicule';
 import { VehiculeService } from '../vehicule.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-ajouter-vehicule-affaire',
@@ -31,6 +31,8 @@ export class AjouterVehiculeAffaireComponent implements OnInit {
 
   dataSourceVehicules = new MatTableDataSource();
 
+  @ViewChild(MatSort) sort: MatSort;
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -44,6 +46,7 @@ export class AjouterVehiculeAffaireComponent implements OnInit {
   refreshTab() {
     this.vehiculeService.getVehicules().subscribe((data: Ivehicule[]) => {
       this.dataSourceVehicules = new MatTableDataSource(data);
+      this.dataSourceVehicules.sort=this.sort;
     });
   }
 
@@ -59,6 +62,10 @@ export class AjouterVehiculeAffaireComponent implements OnInit {
 
   addVehiculeToAffaire(){
     this.selectedVehicule=false;
+  }
+
+  rechercher(){
+
   }
 
 }

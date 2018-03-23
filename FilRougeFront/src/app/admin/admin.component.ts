@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatTableDataSource, MatSort} from '@angular/material';
 import { BddAgent } from '../bddagent';
 import { Iutilisateur } from '../iutilisateur';
 import { UtilisateurService } from '../utilisateur.service';
@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit{
  
   constructor(private utilisateurService:UtilisateurService){}
 
-  displayedColumns = ['nom', 'prenom', 'matricule', 'password', 'habilitation'];
+  displayedColumns = ['nom', 'prenom', 'matricule', 'habilitation'];
   dataSourceUser = new MatTableDataSource();
 
   applyFilter(filterValue: string) {
@@ -33,6 +33,8 @@ export class AdminComponent implements OnInit{
     {value: 'AGENT', viewValue: 'Agent'}
   ];
 
+  @ViewChild(MatSort) sort: MatSort;
+
   ngOnInit(){
     this.clearInput();
 
@@ -44,6 +46,7 @@ export class AdminComponent implements OnInit{
   refreshTab(){
     this.utilisateurService.getUsers().subscribe((data: Iutilisateur[])=>{
       this.dataSourceUser=new MatTableDataSource(data);
+      this.dataSourceUser.sort = this.sort;
     })
   }
 

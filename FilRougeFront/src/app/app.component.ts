@@ -16,6 +16,5 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.sideNavService.sideNav=this.sideNav;
-    console.log(this.sideNav);
   }
 }

@@ -5,23 +5,23 @@
     </mat-form-field>
   </div>
 
-  <mat-table class="filtreTableAffaire" #table [dataSource]="dataSourceAffaire">
+  <mat-table class="filtreTableAffaire" #table [dataSource]="dataSourceAffaire" matSort>
 
     <!-- Nom Column -->
     <ng-container matColumnDef="nom_affaire">
-      <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
       <mat-cell *matCellDef="let affaire"> {{affaire.nom_affaire}} </mat-cell>
     </ng-container>
 
     <!-- Date Creation Column -->
     <ng-container matColumnDef="date_creation">
-      <mat-header-cell *matHeaderCellDef> Création </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Création </mat-header-cell>
       <mat-cell *matCellDef="let affaire"> {{affaire.date_creation}} </mat-cell>
     </ng-container>
 
     <!-- Clos Column -->
     <ng-container matColumnDef="date_cloture">
-      <mat-header-cell *matHeaderCellDef> Classé le </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Classé le </mat-header-cell>
       <mat-cell *matCellDef="let affaire"> {{affaire.date_cloture}} </mat-cell>
     </ng-container>
 
@@ -63,16 +63,16 @@
 
 <br>
 <button mat-raised-button (click)="ajouterArmeAAffaire()">Ajouter Armes à l'affaire</button>
-<button class="mat-raised-button mat-primary" (click)="armeDelAffaire()">Armes de l'affaire</button>
+<button class="mat-raised-button mat-primary" [disabled]="!edition" (click)="armeDelAffaire()">Armes de l'affaire</button>
 
 <br>
 <br>
 <button mat-raised-button (click)="ajoutSuspectsAffaire()">Ajouter Suspects à l'affaire</button>
-<button class="mat-raised-button mat-primary" (click)="supectDelAffaire()">Suspects de l'affaire</button>
+<button class="mat-raised-button mat-primary" [disabled]="!edition" (click)="supectDelAffaire()">Suspects de l'affaire</button>
 <br>
 <br>
 <button mat-raised-button (click)="ajouterVehiculesAffaire()">Ajouter Véhicules à l'affaire</button>
-<button class="mat-raised-button mat-primary" (click)="vehiculeDelAffaire()">Véhicules de l'affaire</button>
+<button class="mat-raised-button mat-primary" [disabled]="!edition" (click)="vehiculeDelAffaire()">Véhicules de l'affaire</button>
 
 <br>
 <br>

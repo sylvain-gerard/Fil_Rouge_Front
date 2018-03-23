@@ -16,6 +16,10 @@ export class ArmesService {
     return this.api.getArmes() as Observable<Iarme[]>;
   }
 
+  getAffaireArmes(id): Observable<Iarme[]>{
+    return this.api.getArmesAffaire(id) as Observable<Iarme[]>;
+  }
+
   updateArme(arme: Iarme): Observable<Iarme> {
     return this.api
       .updateArme(arme.id, arme)

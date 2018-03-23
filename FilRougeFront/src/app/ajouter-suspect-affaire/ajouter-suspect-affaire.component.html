@@ -3,9 +3,16 @@
 <mat-dialog-content>
 
   <div>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Recherche" name="recherche">
+    </mat-form-field>
+      <button mat-raised-button (click)="rechercher()"><mat-icon>search</mat-icon></button>
+  </div>
+
+  <div>
     <div class="filtreTableSuspects">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre" matSort>
       </mat-form-field>
     </div>
 
@@ -13,31 +20,31 @@
 
       <!-- Matricule Column -->
       <ng-container matColumnDef="matricule_suspect">
-        <mat-header-cell *matHeaderCellDef> Matricule </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Matricule </mat-header-cell>
         <mat-cell *matCellDef="let suspect"> {{suspect.matricule}} </mat-cell>
       </ng-container>
 
       <!-- Nom Column -->
       <ng-container matColumnDef="nom_suspect">
-        <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
         <mat-cell *matCellDef="let suspect"> {{suspect.nom}} </mat-cell>
       </ng-container>
 
       <!-- Prenom Column -->
       <ng-container matColumnDef="prenom_suspect">
-        <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
         <mat-cell *matCellDef="let suspect"> {{suspect.prenom}} </mat-cell>
       </ng-container>
 
       <!-- Sexe Column -->
       <ng-container matColumnDef="sexe_suspect">
-        <mat-header-cell *matHeaderCellDef> Sexe </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sexe </mat-header-cell>
         <mat-cell *matCellDef="let suspect"> {{suspect.sexe}} </mat-cell>
       </ng-container>
 
       <!-- Date Naissance Column -->
       <ng-container matColumnDef="date_naissance_suspect">
-        <mat-header-cell *matHeaderCellDef> Date Naissance </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Date Naissance </mat-header-cell>
         <mat-cell *matCellDef="let suspect"> {{suspect.date_naissance}} </mat-cell>
       </ng-container>
 

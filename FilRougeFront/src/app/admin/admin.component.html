@@ -5,34 +5,28 @@
     </mat-form-field>
   </div>
 
-  <mat-table class="filtreTableAgent" #table [dataSource]="dataSourceUser">
+  <mat-table class="filtreTableAgent" #table [dataSource]="dataSourceUser" matSort>
     <!-- Nom Column -->
     <ng-container matColumnDef="nom">
-      <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
       <mat-cell *matCellDef="let agent"> {{agent.nom}} </mat-cell>
     </ng-container>
 
     <!-- Prenom Column -->
     <ng-container matColumnDef="prenom">
-      <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
       <mat-cell *matCellDef="let agent"> {{agent.prenom}} </mat-cell>
     </ng-container>
 
     <!-- Matricule Column -->
     <ng-container matColumnDef="matricule">
-      <mat-header-cell *matHeaderCellDef> Matricule </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Matricule </mat-header-cell>
       <mat-cell *matCellDef="let agent"> {{agent.matricule}} </mat-cell>
-    </ng-container>
-
-    <!-- Mot de passe Column -->
-    <ng-container matColumnDef="password">
-      <mat-header-cell *matHeaderCellDef> Mot de passe </mat-header-cell>
-      <mat-cell *matCellDef="let agent"> {{agent.password}} </mat-cell>
     </ng-container>
 
     <!-- Habilitation Column -->
     <ng-container matColumnDef="habilitation">
-      <mat-header-cell *matHeaderCellDef> Habilitation </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Habilitation </mat-header-cell>
       <mat-cell *matCellDef="let agent"> {{agent.habilitation}} </mat-cell>
     </ng-container>
 

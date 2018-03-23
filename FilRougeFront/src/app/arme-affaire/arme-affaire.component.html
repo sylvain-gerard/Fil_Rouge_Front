@@ -1,5 +1,5 @@
 
-<h2 mat-dialog-title *ngIf="armes; else armeVide">Liste des armes liées à l'affaire : </h2>
+<h2 mat-dialog-title *ngIf="test(); else armeVide">Liste des armes liées à l'affaire : </h2>
 
 <ng-template #armeVide>
     <h2 mat-dialog-title>Aucune arme n'est liée à cette affaire actuellement.</h2>

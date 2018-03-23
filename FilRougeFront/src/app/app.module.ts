@@ -18,7 +18,8 @@ import {
   MatListModule,
   MatDialogModule,
   MatSlideToggleModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSortModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -27,7 +28,6 @@ import { BodyComponent } from './body/body.component';
 import { MenuComponent } from './menu/menu.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { SuspectComponent } from './suspect/suspect.component';
-// import { AffaireComponent } from './affaire/affaire.component';
 import { ArmeComponent } from './arme/arme.component';
 import { VehiculeComponent } from './vehicule/vehicule.component';
 import { AdminComponent } from './admin/admin.component';
@@ -57,7 +57,6 @@ import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
     MenuComponent,
     AccueilComponent,
     SuspectComponent,
-    // AffaireComponent,
     ArmeComponent,
     VehiculeComponent,
     AdminComponent,
@@ -84,6 +83,7 @@ import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
     MatSelectModule,
     MatFormFieldModule,
     MatTableModule,
+    MatSortModule,
     MatNativeDateModule,
     MatListModule,
     AppRoutingModule,

@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MatTableDataSource
+  MatTableDataSource,
+  MatSort
 } from '@angular/material';
 import { Iarme } from '../iarme';
 import { ArmesService } from '../armes.service';
@@ -33,6 +34,8 @@ export class AjouterArmeAaffaireComponent implements OnInit {
   ];
   dataSourceArmes = new MatTableDataSource();
 
+  @ViewChild(MatSort) sort: MatSort;
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -46,6 +49,7 @@ export class AjouterArmeAaffaireComponent implements OnInit {
   refreshTab() {
     this.armeService.getArmes().subscribe((data: Iarme[]) => {
       this.dataSourceArmes = new MatTableDataSource(data);
+      this.dataSourceArmes.sort=this.sort;
     });
   }
 
@@ -61,5 +65,9 @@ export class AjouterArmeAaffaireComponent implements OnInit {
 
   addArmeToAffaire(){
     this.selectedArme=false;
+  }
+
+  rechercher(){
+    
   }
 }
