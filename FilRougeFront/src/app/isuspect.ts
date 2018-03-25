@@ -5,7 +5,6 @@ export interface Isuspect {
     adn:string;
     adresse: string;
     date_naissance:string;
-    photo:string;
     infos_suspect: string;
     poids:number;
     taille:number;

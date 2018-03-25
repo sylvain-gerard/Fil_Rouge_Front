@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class SuspectService {
 
-  constructor(private api:ApiService) { }
+  constructor(private api: ApiService) { }
 
   update$: Subject<any> = new Subject<any>();
   selectedSuspect: Isuspect;

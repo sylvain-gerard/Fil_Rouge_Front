@@ -1,3 +1,131 @@
-<p>
-  suspect works!
-</p>
+<div>
+  <div class="filtreTableSuspect">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+    </mat-form-field>
+  </div>
+
+  <mat-table class="filtreTableSuspect" #table [dataSource]="dataSourceSuspect" matSort>
+
+    <!-- Nom Column -->
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let Suspect"> {{Suspect.nom}} </mat-cell>
+    </ng-container>
+
+    <!--Prénom Column -->
+    <ng-container matColumnDef="prenom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
+      <mat-cell *matCellDef="let Suspect"> {{Suspect.prenom}} </mat-cell>
+    </ng-container>
+
+    <!-- Date de naisssance Column -->
+    <ng-container matColumnDef="date_naissance">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Né le </mat-header-cell>
+      <mat-cell *matCellDef="let Suspect"> {{Suspect.date_naissance}} </mat-cell>
+    </ng-container>
+
+    <!-- Adresse Column -->
+    <ng-container matColumnDef="adresse">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Adresse </mat-header-cell>
+      <mat-cell *matCellDef="let Suspect"> {{Suspect.adresse}} </mat-cell>
+    </ng-container>
+
+    <!-- Taille Column -->
+    <ng-container matColumnDef="taille">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Taille </mat-header-cell>
+      <mat-cell *matCellDef="let Suspect"> {{Suspect.taille}} </mat-cell>
+    </ng-container>
+
+    <!-- Poids Column -->
+    <ng-container matColumnDef="poids">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Poids </mat-header-cell>
+      <mat-cell *matCellDef="let Suspect"> {{Suspect.poids}} </mat-cell>
+    </ng-container>
+
+    <!-- Sexe Column -->
+    <ng-container matColumnDef="sexe">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Sexe </mat-header-cell>
+      <mat-cell *matCellDef="let Suspect"> {{Suspect.sexe}} </mat-cell>
+    </ng-container>
+
+    <!-- Matricule Column -->
+    <ng-container matColumnDef="matricule">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Matricule </mat-header-cell>
+      <mat-cell *matCellDef="let Suspect"> {{Suspect.matricule}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id_Suspect}" (click)="highlight(row)"></mat-row>
+  </mat-table>
+</div>
+<br>
+<form #suspectForm="ngForm" (ngSubmit)="onSubmit(suspectForm)">
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Nom" required name="nom" [(ngModel)]="suspect.nom">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Prénom" name="prenom" [(ngModel)]="suspect.prenom">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Matricule :" name="matricule" [(ngModel)]="suspect.matricule">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Adresse :" name="adresse" [(ngModel)]="suspect.adresse">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput type="date" placeholder="Date de naissance" name="date_naissance" [(ngModel)]="suspect.date_naissance">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Taille :" name="taille" [(ngModel)]="suspect.taille">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Poids :" name="poids" [(ngModel)]="suspect.poids">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Sexe :" name="sexe" [(ngModel)]="suspect.sexe">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="ADN :" name="adn" [(ngModel)]="suspect.adn">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Infos sur le suspect :" name="infos_suspect" [(ngModel)]="suspect.infos_suspect">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Signes particuliers :" name="signes_particuliers" [(ngModel)]="suspect.signes_particuliers">
+  </mat-form-field>
+  <!--
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Photo :" name="photo" [(ngModel)]="suspect.photo">
+  </mat-form-field>
+  -->
+  <br>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!suspectForm.valid">{{edition ? 'Modifier' : 'Créer'}}</button>
+</form>
+<br>
+<br>
+<button mat-raised-button (click)="cancelSelect()">Effacer</button>
+<button mat-raised-button (click)="deleteSuspect()">Supprimer</button>
+<br>
+<br>
