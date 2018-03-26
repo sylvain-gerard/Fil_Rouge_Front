@@ -1,3 +1,21 @@
-<p>
-  vehicule-affaire works!
-</p>
+
+<h2 mat-dialog-title *ngIf="test(); else vehiculeVide">Liste des véhicules liés à l'affaire : {{affaire.nom_affaire}}</h2>
+
+<ng-template #vehiculeVide>
+    <h2 mat-dialog-title>Aucun véhicule n'est lié à cette affaire actuellement.</h2>
+</ng-template>
+
+<mat-dialog-content>
+  <mat-list *ngFor="let vehicule of vehicules">
+    <mat-list-item>
+      <div>{{vehicule.type}} | {{vehicule.marque}} | {{vehicule.modele}} | {{vehicule.couleur_vehicule}}</div>
+      <button class="mat-button" matTooltip="Ne plus lier ce véhicule à cette affaire." matTooltipPosition="right"><mat-icon>delete</mat-icon></button>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
+</mat-dialog-actions>

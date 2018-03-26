@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Iaffaire } from '../iaffaire';
 import {
   MatTableDataSource,
@@ -15,23 +15,28 @@ import { SuspectAffaireComponent } from '../suspect-affaire/suspect-affaire.comp
 import { VehiculeAffaireComponent } from '../vehicule-affaire/vehicule-affaire.component';
 import { AjouterSuspectAffaireComponent } from '../ajouter-suspect-affaire/ajouter-suspect-affaire.component';
 import { AjouterVehiculeAffaireComponent } from '../ajouter-vehicule-affaire/ajouter-vehicule-affaire.component';
-
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-affaire-list',
   templateUrl: './affaire-list.component.html',
   styleUrls: ['./affaire-list.component.css']
 })
-export class AffaireListComponent implements OnInit {
+export class AffaireListComponent implements OnInit, OnDestroy {
   aff: Iaffaire;
   armes: Iarme[];
   selectedRowIndex: number = -1;
   edition: boolean = false;
+  getAffSubscription: Subscription;
+  createAffSubscription: Subscription;
+  updateAffSubscription: Subscription;
+  deleteAffSubscription: Subscription;
 
   constructor(
     private affaireService: AffaireService,
     private armeService: ArmesService,
-    public dialog: MatDialog, public dialog2: MatDialog
+    public dialog: MatDialog,
+    public dialog2: MatDialog
   ) {}
 
   displayedColumns = ['nom_affaire', 'date_creation', 'date_cloture'];
@@ -62,13 +67,20 @@ export class AffaireListComponent implements OnInit {
     this.affaireService.update$.subscribe(() => this.refreshTab());
   }
 
-  async refreshTab() {
-    const toto = await this.affaireService.getAffaires().subscribe((data: Iaffaire[]) => {
-      this.dataSourceAffaire = new MatTableDataSource(data);
-      this.dataSourceAffaire.sort = this.sort;
-    });
-    console.log("1 ! + " + toto);
-    console.log("avant ?");
+  ngOnDestroy() {
+    this.getAffSubscription.unsubscribe();
+    this.createAffSubscription.unsubscribe();
+    this.updateAffSubscription.unsubscribe();
+    this.deleteAffSubscription.unsubscribe();
+  }
+
+  refreshTab() {
+    this.getAffSubscription = this.affaireService
+      .getAffaires()
+      .subscribe((data: Iaffaire[]) => {
+        this.dataSourceAffaire = new MatTableDataSource(data);
+        this.dataSourceAffaire.sort = this.sort;
+      });
   }
 
   highlight(row) {
@@ -84,21 +96,30 @@ export class AffaireListComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.aff.date_cloture<this.aff.date_creation && this.aff.date_cloture!=""){
-      console.log("ERROR Date Creation");
+    if (
+      this.aff.date_cloture < this.aff.date_creation &&
+      this.aff.date_cloture != ''
+    ) {
+      console.log('ERROR Date Creation');
       console.log(this.aff.date_cloture);
-      return
+      return;
     }
     if (this.edition) {
-      this.affaireService.updateAffaire(this.aff).subscribe();
+      this.updateAffSubscription = this.affaireService
+        .updateAffaire(this.aff)
+        .subscribe();
     } else {
-      this.affaireService.createAffaire(this.aff).subscribe();
+      this.createAffSubscription = this.affaireService
+        .createAffaire(this.aff)
+        .subscribe();
     }
   }
 
   deleteAffaire() {
     this.edition = false;
-    this.affaireService.deleteAffaires(this.aff.id_affaire).subscribe();
+    this.deleteAffSubscription = this.affaireService
+      .deleteAffaires(this.aff.id_affaire)
+      .subscribe();
     this.clearInput();
   }
 
@@ -115,26 +136,44 @@ export class AffaireListComponent implements OnInit {
   }
 
   ajouterArmeAAffaire() {
-    this.dialog.open(AjouterArmeAaffaireComponent, { width: '600px' });
+    this.dialog.open(AjouterArmeAaffaireComponent, {
+      width: '600px',
+      data: this.aff.id_affaire
+    });
   }
 
-  armeDelAffaire(){
-    this.dialog.open(ArmeAffaireComponent, { width: '600px', data : this.aff.id_affaire });
+  armeDelAffaire() {
+    this.dialog.open(ArmeAffaireComponent, {
+      width: '600px',
+      data: this.aff.id_affaire
+    });
   }
 
-  ajoutSuspectsAffaire(){
-    this.dialog.open(AjouterSuspectAffaireComponent, { width: '600px' });
+  ajoutSuspectsAffaire() {
+    this.dialog.open(AjouterSuspectAffaireComponent, {
+      width: '600px',
+      data: this.aff.id_affaire
+    });
   }
 
-  supectDelAffaire(){
-    this.dialog.open(SuspectAffaireComponent, { width: '600px' });
+  supectDelAffaire() {
+    this.dialog.open(SuspectAffaireComponent, {
+      width: '600px',
+      data: this.aff.id_affaire
+    });
   }
 
-  ajouterVehiculesAffaire(){
-    this.dialog.open(AjouterVehiculeAffaireComponent, { width: '600px' });
+  ajouterVehiculesAffaire() {
+    this.dialog.open(AjouterVehiculeAffaireComponent, {
+      width: '600px',
+      data: this.aff.id_affaire
+    });
   }
 
-  vehiculeDelAffaire(){
-    this.dialog.open(VehiculeAffaireComponent, { width: '600px' });
+  vehiculeDelAffaire() {
+    this.dialog.open(VehiculeAffaireComponent, {
+      width: '600px',
+      data: this.aff.id_affaire
+    });
   }
 }
