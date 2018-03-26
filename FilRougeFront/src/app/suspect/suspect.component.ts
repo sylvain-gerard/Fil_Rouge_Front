@@ -67,7 +67,7 @@ export class SuspectComponent implements OnInit {
   }
 
   highlight(row) {
-    this.selectedRowIndex = row.id_affaire;
+    this.selectedRowIndex = row.id;
     this.suspect = Object.assign({}, row);
     this.edition = true;
   }
