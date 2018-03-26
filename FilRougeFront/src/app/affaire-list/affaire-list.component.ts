@@ -22,7 +22,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './affaire-list.component.html',
   styleUrls: ['./affaire-list.component.css']
 })
-export class AffaireListComponent implements OnInit, OnDestroy {
+export class AffaireListComponent implements OnInit {
   aff: Iaffaire;
   armes: Iarme[];
   selectedRowIndex: number = -1;
@@ -67,15 +67,15 @@ export class AffaireListComponent implements OnInit, OnDestroy {
     this.affaireService.update$.subscribe(() => this.refreshTab());
   }
 
-  ngOnDestroy() {
-    this.getAffSubscription.unsubscribe();
-    this.createAffSubscription.unsubscribe();
-    this.updateAffSubscription.unsubscribe();
-    this.deleteAffSubscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.getAffSubscription.unsubscribe();
+  //   this.createAffSubscription.unsubscribe();
+  //   this.updateAffSubscription.unsubscribe();
+  //   this.deleteAffSubscription.unsubscribe();
+  // }
 
   refreshTab() {
-    this.getAffSubscription = this.affaireService
+    this.affaireService
       .getAffaires()
       .subscribe((data: Iaffaire[]) => {
         this.dataSourceAffaire = new MatTableDataSource(data);
@@ -105,11 +105,11 @@ export class AffaireListComponent implements OnInit, OnDestroy {
       return;
     }
     if (this.edition) {
-      this.updateAffSubscription = this.affaireService
+      this.affaireService
         .updateAffaire(this.aff)
         .subscribe();
     } else {
-      this.createAffSubscription = this.affaireService
+      this.affaireService
         .createAffaire(this.aff)
         .subscribe();
     }
@@ -117,7 +117,7 @@ export class AffaireListComponent implements OnInit, OnDestroy {
 
   deleteAffaire() {
     this.edition = false;
-    this.deleteAffSubscription = this.affaireService
+    this.affaireService
       .deleteAffaires(this.aff.id_affaire)
       .subscribe();
     this.clearInput();

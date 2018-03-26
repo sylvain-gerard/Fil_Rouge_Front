@@ -7,11 +7,14 @@ import { Iarme } from './iarme';
 import { Iutilisateur } from './iutilisateur';
 import { Ivehicule } from './ivehicule';
 import { Isuspect } from './isuspect';
+import { Iobjetsaffaire } from './iobjetsaffaire';
 
 @Injectable()
 export class ApiService {
   URL: string = 'http://192.168.1.109:8080/api';
   // URL: string = 'http://localhost:8080/api';
+
+  objetsDeLAffaire: Iobjetsaffaire;
 
   constructor(private http: HttpClient) {}
 
@@ -64,7 +67,9 @@ export class ApiService {
   }
 
   addArmeAffaire(id_affaire, id_arme){
-    return this.http.post<any[]>(`${this.URL}/affaire/${id_affaire}/arme/${id_arme}`, [id_affaire, id_arme]);
+    this.objetsDeLAffaire.idAffaire=id_affaire;
+    this.objetsDeLAffaire.idObjet=id_arme;
+    return this.http.post<any[]>(`${this.URL}/affaire/${id_affaire}/arme/${id_arme}`, this.objetsDeLAffaire);
   }
 
   updateArme(id, arme: Iarme) {

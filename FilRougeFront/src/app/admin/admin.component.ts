@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatSort} from '@angular/material';
-import { BddAgent } from '../bddagent';
 import { Iutilisateur } from '../iutilisateur';
 import { UtilisateurService } from '../utilisateur.service';
 
