@@ -4,6 +4,7 @@ import { Iaffaire } from '../iaffaire';
 import { AffaireService } from '../affaire.service';
 import { VehiculeService } from '../vehicule.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Iobjetsaffaire } from '../iobjetsaffaire';
 
 @Component({
   selector: 'app-affaires-liees-au-vehicule',
@@ -44,6 +45,14 @@ export class AffairesLieesAuVehiculeComponent implements OnInit {
 
   closeDial() {
     this.dialogRef.close();
+  }
+
+  delierDuVehicule(idAffaire) {
+    const idAffaireEtVehicule: Iobjetsaffaire = {
+      idAffaire: idAffaire,
+      idObjet: this.vehicule.id
+    };
+    this.vehiculeService.supprVehiculeAffaire(idAffaireEtVehicule).subscribe(succes => this.refreshList());
   }
 
   test() {
