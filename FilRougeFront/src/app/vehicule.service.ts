@@ -38,8 +38,8 @@ export class VehiculeService {
     return this.api.addVehiculeAffaire(idAffaireEtVehicule) as Observable<Iobjetsaffaire>;
   }
 
-  supprVehiculeAffaire(idAffaireEtVehicule) :Observable<Iobjetsaffaire>{
-    return this.api.supprSuspectAffaire(idAffaireEtVehicule) as Observable<Iobjetsaffaire>;
+  supprVehiculeAffaire(idAffaireEtVehicule): Observable<Iobjetsaffaire>{
+    return this.api.supprVehiculeAffaire(idAffaireEtVehicule) as Observable<Iobjetsaffaire>;
   }
 
   updateVehicule(vehicule: Ivehicule): Observable<Ivehicule> {
