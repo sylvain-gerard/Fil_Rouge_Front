@@ -62,13 +62,11 @@ export class SuspectComponent implements OnInit {
     this.suspectService.update$.subscribe(() => this.refreshTab());
   }
 
-  async refreshTab() {
-    const toto = await this.suspectService.getSuspects().subscribe((data: Isuspect[]) => {
+refreshTab() {
+    this.suspectService.getSuspects().subscribe((data: Isuspect[]) => {
       this.dataSourceSuspect = new MatTableDataSource(data);
       this.dataSourceSuspect.sort = this.sort;
     });
-    console.log('1 ! + ' + toto);
-    console.log('avant ?');
   }
 
   highlight(row) {
