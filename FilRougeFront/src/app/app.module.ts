@@ -50,6 +50,7 @@ import { VehiculeAffaireComponent } from './vehicule-affaire/vehicule-affaire.co
 import { SuspectAffaireComponent } from './suspect-affaire/suspect-affaire.component';
 import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
 import { AffairesLieesAuVehiculeComponent } from './affaires-liees-au-vehicule/affaires-liees-au-vehicule.component';
+import { AffaireLieesSuspectComponent } from './affaire-liees-suspect/affaire-liees-suspect.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { AffairesLieesAuVehiculeComponent } from './affaires-liees-au-vehicule/a
     VehiculeAffaireComponent,
     SuspectAffaireComponent,
     ArmeAffaireComponent,
-    AffairesLieesAuVehiculeComponent
+    AffairesLieesAuVehiculeComponent,
+    AffaireLieesSuspectComponent
   ],
   imports: [
     BrowserModule,
