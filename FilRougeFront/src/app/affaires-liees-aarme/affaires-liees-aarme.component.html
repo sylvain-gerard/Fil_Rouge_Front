@@ -1,0 +1,21 @@
+
+<h2 mat-dialog-title *ngIf="test(); else affaireVide">Liste des affaires liées à l'arme : {{arme.numero_serie}}</h2>
+
+<ng-template #affaireVide>
+    <h2 mat-dialog-title>Aucune affaire n'est liée à cette arme actuellement.</h2>
+</ng-template>
+
+<mat-dialog-content>
+  <mat-list *ngFor="let affaire of affaires">
+    <mat-list-item>
+      <div>{{affaire.nom_affaire}} | {{affaire.date_creation}} | {{affaire.date_cloture}} | {{affaire.classee}}</div>
+      <button class="mat-button" matTooltip="Ne plus lier cette affaire à cette arme." matTooltipPosition="right" (click)="delierDeLaffaire(affaire.id_affaire)"><mat-icon>delete</mat-icon></button>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
+</mat-dialog-actions>

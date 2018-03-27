@@ -57,6 +57,13 @@ export class ApiService {
   getArmes() {
     return this.http.get<Iarme[]>(`${this.URL}/armes`);
   }
+  getOneArme(id) {
+    return this.http.get<Iarme>(`${this.URL}/arme/${id}`);
+  }
+
+  getAffairesArme(id) {
+    return this.http.get<Iaffaire[]>(`${this.URL}/arme/${id}/affaires`);
+  }
 
   getArmesAffaire(id) {
     return this.http.get<Iarme[]>(`${this.URL}/affaire/${id}/armes`);

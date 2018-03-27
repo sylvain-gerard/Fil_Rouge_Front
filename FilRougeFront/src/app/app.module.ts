@@ -51,6 +51,7 @@ import { SuspectAffaireComponent } from './suspect-affaire/suspect-affaire.compo
 import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
 import { AffairesLieesAuVehiculeComponent } from './affaires-liees-au-vehicule/affaires-liees-au-vehicule.component';
 import { AffaireLieesSuspectComponent } from './affaire-liees-suspect/affaire-liees-suspect.component';
+import { AffairesLieesAarmeComponent } from './affaires-liees-aarme/affaires-liees-aarme.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,11 @@ import { AffaireLieesSuspectComponent } from './affaire-liees-suspect/affaire-li
     SuspectAffaireComponent,
     ArmeAffaireComponent,
     AffairesLieesAuVehiculeComponent,
+<<<<<<< HEAD
     AffaireLieesSuspectComponent
+=======
+    AffairesLieesAarmeComponent
+>>>>>>> 341f47a2e03c1d2a47b855b2e60ca9c42fb058ea
   ],
   imports: [
     BrowserModule,
@@ -116,7 +121,8 @@ import { AffaireLieesSuspectComponent } from './affaire-liees-suspect/affaire-li
     SuspectAffaireComponent,
     AjouterVehiculeAffaireComponent,
     VehiculeAffaireComponent,
-    AffairesLieesAuVehiculeComponent
+    AffairesLieesAuVehiculeComponent,
+    AffairesLieesAarmeComponent
   ]
 })
 export class AppModule {}
