@@ -9,7 +9,7 @@
   <mat-list *ngFor="let suspect of suspects">
     <mat-list-item>
       <div>{{suspect.matricule}} | {{suspect.nom}} {{suspect.prenom}} | {{suspect.sexe}}</div>
-      <button class="mat-button" matTooltip="Ne plus lier ce suspect à cette affaire." matTooltipPosition="right"><mat-icon>delete</mat-icon></button>
+      <button class="mat-button" matTooltip="Ne plus lier ce suspect à cette affaire." matTooltipPosition="right" (click)="delierDeLaffaire(suspect.id)"><mat-icon>delete</mat-icon></button>
     </mat-list-item>
   </mat-list>
 

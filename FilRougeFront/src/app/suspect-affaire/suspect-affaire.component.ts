@@ -4,6 +4,7 @@ import { SuspectService } from '../suspect.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AffaireService } from '../affaire.service';
 import { Iaffaire } from '../iaffaire';
+import { Iobjetsaffaire } from '../iobjetsaffaire';
 
 @Component({
   selector: 'app-suspect-affaire',
@@ -12,6 +13,7 @@ import { Iaffaire } from '../iaffaire';
 })
 export class SuspectAffaireComponent implements OnInit {
   suspects: Isuspect[];
+  suspect:Isuspect;
   affaire:Iaffaire;
 
   constructor(
@@ -42,6 +44,14 @@ export class SuspectAffaireComponent implements OnInit {
 
   closeDial(){
     this.dialogRef.close();
+  }
+
+  delierDeLaffaire(idSuspect){
+    let idAffaireEtSuspect: Iobjetsaffaire = {
+      idAffaire: this.affaire.id_affaire,
+      idObjet: idSuspect
+    };
+    this.suspectService.supprSuspectAffaire(idAffaireEtSuspect).subscribe(succes=>this.refreshList());
   }
 
   test(){

@@ -4,9 +4,13 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatTableDataSource,
-  MatSort
+  MatSort,
+  MatSnackBar
 } from '@angular/material';
 import { Isuspect } from '../isuspect';
+import { Iobjetsaffaire } from '../iobjetsaffaire';
+import { Iaffaire } from '../iaffaire';
+import { AffaireService } from '../affaire.service';
 
 @Component({
   selector: 'app-ajouter-suspect-affaire',
@@ -16,10 +20,13 @@ import { Isuspect } from '../isuspect';
 export class AjouterSuspectAffaireComponent implements OnInit {
   suspect: Isuspect;
   suspects: Isuspect[];
+  affaire:Iaffaire;
   selectedSuspect: boolean = false;
   selectedRowIndex: number = -1;
 
   constructor(
+    private snackBar:MatSnackBar,
+    private affaireService: AffaireService,
     private suspectService: SuspectService,
     public dialogRef: MatDialogRef<AjouterSuspectAffaireComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -43,15 +50,9 @@ export class AjouterSuspectAffaireComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refreshTab();
+    this.affaireService.getOneAffaire(this.data).subscribe(affaire=>this.affaire = affaire);
   }
 
-  refreshTab() {
-    this.suspectService.getSuspects().subscribe((data: Isuspect[]) => {
-      this.dataSourceSuspects = new MatTableDataSource(data);
-      this.dataSourceSuspects.sort=this.sort;
-    });
-  }
 
   highlight(row) {
     this.selectedRowIndex = row.id;
@@ -63,11 +64,29 @@ export class AjouterSuspectAffaireComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  addSuspectToAffaire(){
-    this.selectedSuspect=false;
+  addSuspectToAffaire() {
+    this.selectedSuspect = false;
+    this.selectedRowIndex=-1;
+    let idAffaireEtSuspect: Iobjetsaffaire = {
+      idAffaire: this.affaire.id_affaire,
+      idObjet: this.suspect.id
+    };
+    this.suspectService.addSuspectAffaire(idAffaireEtSuspect).subscribe(
+      result=> {this.afficherMessage("Enregistrement effectué", "")},
+      error => {this.afficherMessage("", "Suspect déjà présent dans l'affaire")}
+    )
   }
 
-  rechercher(){
-
+  afficherMessage(message:string, erreur: string){
+    this.snackBar.open(message,erreur, {
+      duration: 2000,
+    });
   }
+
+  rechercher(recherche) {
+    this.suspectService.searchSuspects(recherche).subscribe((data: Isuspect[]) => {
+      this.dataSourceSuspects = new MatTableDataSource(data);
+      this.dataSourceSuspects.sort = this.sort;
+    });
+  } 
 }

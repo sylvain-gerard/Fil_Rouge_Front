@@ -98,6 +98,14 @@ export class ApiService {
     return this.http.get<Ivehicule[]>(`${this.URL}/vehicules/${recherche}`);
   }
 
+  addVehiculeAffaire(idAffaireEtVehicule: Iobjetsaffaire) {    
+    return this.http.post<Iobjetsaffaire>(`${this.URL}/affaire/lierVehicule`, idAffaireEtVehicule);
+  }
+
+  supprVehiculeAffaire(idAffaireEtVehicule:Iobjetsaffaire){
+    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtVehicule.idAffaire}/suppVehicule/${idAffaireEtVehicule.idObjet}`)
+  }
+
   updateVehicule(id, vehicule: Ivehicule) {
     return this.http.put<Ivehicule>(`${this.URL}/vehicule/${id}`, vehicule);
   }
@@ -120,6 +128,14 @@ export class ApiService {
 
   searchSuspects(recherche) {
     return this.http.get<Isuspect[]>(`${this.URL}/suspects/${recherche}`);
+  }
+
+  addSuspectAffaire(idAffaireEtSuspect: Iobjetsaffaire) {    
+    return this.http.post<Iobjetsaffaire>(`${this.URL}/affaire/lierSuspect`, idAffaireEtSuspect);
+  }
+
+  supprSuspectAffaire(idAffaireEtSuspect:Iobjetsaffaire){
+    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtSuspect.idAffaire}/suppSuspect/${idAffaireEtSuspect.idObjet}`)
   }
 
   updateSuspect(id, suspect: Isuspect) {

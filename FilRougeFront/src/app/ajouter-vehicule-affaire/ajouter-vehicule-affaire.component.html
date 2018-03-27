@@ -4,12 +4,12 @@
 
   <div>
     <mat-form-field>
-      <input matInput type="text" placeholder="Recherche" name="recherche">
+      <input matInput type="text" placeholder="Recherche" name="recherche" #recherche>
     </mat-form-field>
-      <button mat-raised-button (click)="rechercher()"><mat-icon>search</mat-icon></button>
+      <button mat-raised-button (click)="rechercher(recherche.value)"><mat-icon>search</mat-icon></button>
   </div>  
 
-  <div>
+  <div *ngIf="dataSourceVehicules.data.length>0">
     <div class="filtreTableVehicules">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
@@ -20,32 +20,32 @@
 
       <!-- Immatriculation Column -->
       <ng-container matColumnDef="immatriculation_vehicule">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Immatriculation </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.immatriculation}} </mat-cell>
       </ng-container>
 
       <!-- Type Column -->
       <ng-container matColumnDef="type_vehicule">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Marque </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.type}} </mat-cell>
       </ng-container>
 
       <!-- Marque Column -->
       <ng-container matColumnDef="marque_vehicule">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Modèle </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Marque </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.marque}} </mat-cell>
       </ng-container>
 
       <!-- Modele Column -->
       <ng-container matColumnDef="modele_vehicule">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> N° série </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Modèle </mat-header-cell>
         <mat-cell *matCellDef="let vehicule"> {{vehicule.modele}} </mat-cell>
       </ng-container>
 
       <!-- Couleur Column -->
       <ng-container matColumnDef="couleur_du_vehicule">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> N° série </mat-header-cell>
-        <mat-cell *matCellDef="let vehicule"> {{vehicule.couleur}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Couleur </mat-header-cell>
+        <mat-cell *matCellDef="let vehicule"> {{vehicule.couleur_vehicule}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -56,6 +56,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" [disabled]="!selectedArme" (click)="addVehiculeToAffaire()">Ajouter</button>
+  <button class="mat-raised-button mat-primary" [disabled]="!selectedVehicule" (click)="addVehiculeToAffaire()">Ajouter</button>
   <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
 </mat-dialog-actions>

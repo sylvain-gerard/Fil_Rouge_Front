@@ -4,6 +4,7 @@ import { Iaffaire } from '../iaffaire';
 import { AffaireService } from '../affaire.service';
 import { VehiculeService } from '../vehicule.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Iobjetsaffaire } from '../iobjetsaffaire';
 
 @Component({
   selector: 'app-vehicule-affaire',
@@ -12,6 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class VehiculeAffaireComponent implements OnInit {
   vehicules: Ivehicule[];
+  vehicule:Ivehicule;
   affaire: Iaffaire;
 
   constructor(
@@ -42,6 +44,14 @@ export class VehiculeAffaireComponent implements OnInit {
 
   closeDial(){
     this.dialogRef.close();
+  }
+
+  delierDeLaffaire(idVehicule){
+    let idAffaireEtVehicule: Iobjetsaffaire = {
+      idAffaire: this.affaire.id_affaire,
+      idObjet: idVehicule
+    };
+    this.vehiculeService.supprVehiculeAffaire(idAffaireEtVehicule).subscribe(succes=>this.refreshList());
   }
 
   test(){

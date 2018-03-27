@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Ivehicule } from './ivehicule';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
+import { Iobjetsaffaire } from './iobjetsaffaire';
 
 @Injectable()
 export class VehiculeService {
@@ -22,6 +23,14 @@ export class VehiculeService {
 
   searchVehicules(recherche): Observable<Ivehicule[]>{
     return this.api.searchVehicules(recherche) as Observable<Ivehicule[]>;
+  }
+
+  addVehiculeAffaire(idAffaireEtVehicule) : Observable<Iobjetsaffaire>{
+    return this.api.addVehiculeAffaire(idAffaireEtVehicule) as Observable<Iobjetsaffaire>;
+  }
+
+  supprVehiculeAffaire(idAffaireEtVehicule) :Observable<Iobjetsaffaire>{
+    return this.api.supprSuspectAffaire(idAffaireEtVehicule) as Observable<Iobjetsaffaire>;
   }
 
   updateVehicule(vehicule: Ivehicule): Observable<Ivehicule> {

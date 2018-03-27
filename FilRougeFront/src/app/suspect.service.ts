@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Isuspect } from './isuspect';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
+import { Iobjetsaffaire } from './iobjetsaffaire';
 
 @Injectable()
 export class SuspectService {
@@ -23,6 +24,14 @@ export class SuspectService {
 
   searchSuspects(recherche): Observable<Isuspect[]>{
     return this.api.searchSuspects(recherche) as Observable<Isuspect[]>;
+  }
+
+  addSuspectAffaire(idAffaireEtSuspect) : Observable<Iobjetsaffaire>{
+    return this.api.addSuspectAffaire(idAffaireEtSuspect) as Observable<Iobjetsaffaire>;
+  }
+
+  supprSuspectAffaire(idAffaireEtSuspect) :Observable<Iobjetsaffaire>{
+    return this.api.supprSuspectAffaire(idAffaireEtSuspect) as Observable<Iobjetsaffaire>;
   }
 
   updateSuspect(suspect: Isuspect): Observable<Isuspect> {

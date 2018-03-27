@@ -4,19 +4,19 @@
 
   <div>
     <mat-form-field>
-      <input matInput type="text" placeholder="Recherche" name="recherche">
+      <input matInput type="text" placeholder="Recherche" name="recherche" #recherche>
     </mat-form-field>
-      <button mat-raised-button (click)="rechercher()"><mat-icon>search</mat-icon></button>
+    <button mat-raised-button (click)="rechercher(recherche.value)"><mat-icon>search</mat-icon></button>
   </div>
 
-  <div>
+  <div *ngIf="dataSourceSuspects.data.length>0">
     <div class="filtreTableSuspects">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre" matSort>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
       </mat-form-field>
     </div>
 
-    <mat-table class="filtreTableSuspects" #table [dataSource]="dataSourceSuspects">
+    <mat-table class="filtreTableSuspects" #table [dataSource]="dataSourceSuspects" matSort>
 
       <!-- Matricule Column -->
       <ng-container matColumnDef="matricule_suspect">
@@ -57,6 +57,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" [disabled]="!selectedArme" (click)="addSuspectToAffaire()">Ajouter</button>
+  <button class="mat-raised-button mat-primary" [disabled]="!selectedSuspect" (click)="addSuspectToAffaire()">Ajouter</button>
   <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
 </mat-dialog-actions>
