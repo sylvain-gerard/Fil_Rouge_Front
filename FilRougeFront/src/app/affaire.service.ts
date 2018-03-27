@@ -22,6 +22,10 @@ export class AffaireService {
     return this.api.getOneAffaire(id) as Observable<Iaffaire>;
   }
 
+  getAffairesVehicule(id): Observable<Iaffaire[]> {
+    return this.api.getAffairesVehicule(id) as Observable<Iaffaire[]>;
+  }
+
   updateAffaire(affaire: Iaffaire): Observable<Iaffaire> {
     return this.api
       .updateAffaire(affaire.id_affaire, affaire)

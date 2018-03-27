@@ -90,8 +90,16 @@ export class ApiService {
     return this.http.get<Ivehicule[]>(`${this.URL}/vehicules`);
   }
 
+  getOneVehicule(id) {
+    return this.http.get<Ivehicule>(`${this.URL}/vehicule/${id}`);
+  }
+
   getVehiculesAffaire(id) {
     return this.http.get<Ivehicule[]>(`${this.URL}/affaire/${id}/vehicules`);
+  }
+
+  getAffairesVehicule(id) {
+    return this.http.get<Iaffaire[]>(`${this.URL}/vehicule/${id}/affaires`);
   }
 
   searchVehicules(recherche) {

@@ -16,6 +16,7 @@ import { SuspectAffaireComponent } from '../suspect-affaire/suspect-affaire.comp
 import { VehiculeAffaireComponent } from '../vehicule-affaire/vehicule-affaire.component';
 import { AjouterSuspectAffaireComponent } from '../ajouter-suspect-affaire/ajouter-suspect-affaire.component';
 import { AjouterVehiculeAffaireComponent } from '../ajouter-vehicule-affaire/ajouter-vehicule-affaire.component';
+import { AffairesLieesAuVehiculeComponent } from '../affaires-liees-au-vehicule/affaires-liees-au-vehicule.component';
 
 @Component({
   selector: 'app-vehicule',
@@ -118,7 +119,10 @@ export class VehiculeComponent implements OnInit {
     };
   }
 
-  vehiculeDelAffaire() {
-    this.dialog.open(VehiculeAffaireComponent, { width: '600px' });
+  affairesDuVehicule() {
+    this.dialog.open(AffairesLieesAuVehiculeComponent, {
+      width: '600px',
+      data: this.vehi.id
+    });
   }
 }
