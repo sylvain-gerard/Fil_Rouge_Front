@@ -21,6 +21,9 @@ export class ApiService {
     return this.http.get<Iaffaire[]>(`${this.URL}/affaires`);
   }
 
+  getOneAffaire(id) {
+    return this.http.get<Iaffaire>(`${this.URL}/affaire/${id}`);
+  }
   
   updateAffaire(id, affaire: Iaffaire) {
     return this.http.put<Iaffaire>(`${this.URL}/affaire/${id}`, affaire);
@@ -55,10 +58,31 @@ export class ApiService {
   getArmes() {
     return this.http.get<Iarme[]>(`${this.URL}/armes`);
   }
-  
-  getArmesAffaire(id){
-    return this.http.get<Iarme[]>(`${this.URL}/affaire/${id}/armes`)
+
+  getOneArme(id) {
+    return this.http.get<Iarme>(`${this.URL}/arme/${id}`);
   }
+  
+  getAffairesArme(id) {
+    return this.http.get<Iaffaire[]>(`${this.URL}/arme/${id}/affaires`);
+  }
+
+  getArmesAffaire(id) {
+    return this.http.get<Iarme[]>(`${this.URL}/affaire/${id}/armes`);
+  }
+
+  searchArmes(recherche) {
+    return this.http.get<Iarme[]>(`${this.URL}/armes/${recherche}`);
+  }
+
+  addArmeAffaire(idAffaireEtArme: Iobjetsaffaire) {    
+    return this.http.post<Iobjetsaffaire>(`${this.URL}/affaire/lierArme`, idAffaireEtArme);
+  }
+
+  supprArmeAffaire(idAffaireEtArme:Iobjetsaffaire){
+    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtArme.idAffaire}/suppArme/${idAffaireEtArme.idObjet}`)
+  }
+
   updateArme(id, arme: Iarme) {
     return this.http.put<Iarme>(`${this.URL}/arme/${id}`, arme);
   }
