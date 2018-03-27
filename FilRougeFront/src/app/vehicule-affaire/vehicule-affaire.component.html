@@ -9,7 +9,7 @@
   <mat-list *ngFor="let vehicule of vehicules">
     <mat-list-item>
       <div>{{vehicule.type}} | {{vehicule.marque}} | {{vehicule.modele}} | {{vehicule.couleur_vehicule}}</div>
-      <button class="mat-button" matTooltip="Ne plus lier ce véhicule à cette affaire." matTooltipPosition="right" (click)="delierDeLaffaire(vehicule.id)"><mat-icon>delete</mat-icon></button>
+      <button class="mat-button" matTooltip="Ne plus lier ce véhicule à cette affaire." matTooltipPosition="right" (click)="delierDeLaffaire(vehicule.id)"><mat-icon>unlink</mat-icon></button>
     </mat-list-item>
   </mat-list>
 

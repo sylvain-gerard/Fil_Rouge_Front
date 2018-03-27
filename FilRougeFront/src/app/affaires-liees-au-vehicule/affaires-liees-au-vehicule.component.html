@@ -8,12 +8,10 @@
   <mat-list *ngFor="let affaire of affaires">
     <mat-list-item>
       <div>{{affaire.nom_affaire}} | {{affaire.date_creation}} | {{affaire.date_cloture}}</div>
-      <button class="mat-button" matTooltip="Ne plus lier cette affaire à ce véhicule" matTooltipPosition="right"><mat-icon>delete</mat-icon></button>
+      <button class="mat-button" matTooltip="Ne plus lier cette affaire à ce véhicule" matTooltipPosition="right" (click)="delierDuVehicule(affaire.id_affaire)"><mat-icon>delete</mat-icon></button>
     </mat-list-item>
   </mat-list>
-
 </mat-dialog-content>
-
 
 <mat-dialog-actions>
   <button class="mat-raised-button" (click)="closeDial()">Fermer</button>

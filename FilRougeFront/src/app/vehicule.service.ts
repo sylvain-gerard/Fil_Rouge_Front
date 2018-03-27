@@ -26,6 +26,10 @@ export class VehiculeService {
     return this.api.getVehiculesAffaire(id) as Observable<Ivehicule[]>;
   }
 
+  deleteAffairesVehicule(idAffaireEtVehicule): Observable<Iobjetsaffaire> {
+    return this.api.deleteAffairesVehicule(idAffaireEtVehicule) as Observable<Iobjetsaffaire>;
+  }
+
   searchVehicules(recherche): Observable<Ivehicule[]>{
     return this.api.searchVehicules(recherche) as Observable<Ivehicule[]>;
   }
