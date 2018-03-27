@@ -61,18 +61,21 @@
   <button mat-raised-button color="primary" type="submit" [disabled]="!affaireForm.valid">{{edition ? 'Modifier' : 'Créer'}}</button>
 </form>
 
-<br>
-<button mat-raised-button (click)="ajouterArmeAAffaire()">Ajouter Armes à l'affaire</button>
-<button class="mat-raised-button mat-primary" [disabled]="!edition" (click)="armeDelAffaire()">Armes de l'affaire</button>
+<div *ngIf="edition">
+  <br>
+  <button mat-raised-button (click)="ajouterArmeAAffaire()">Ajouter Armes à l'affaire</button>
+  <button class="mat-raised-button mat-primary" (click)="armeDelAffaire()">Armes de l'affaire</button>
 
-<br>
-<br>
-<button mat-raised-button (click)="ajoutSuspectsAffaire()">Ajouter Suspects à l'affaire</button>
-<button class="mat-raised-button mat-primary" [disabled]="!edition" (click)="supectDelAffaire()">Suspects de l'affaire</button>
-<br>
-<br>
-<button mat-raised-button (click)="ajouterVehiculesAffaire()">Ajouter Véhicules à l'affaire</button>
-<button class="mat-raised-button mat-primary" [disabled]="!edition" (click)="vehiculeDelAffaire()">Véhicules de l'affaire</button>
+  <br>
+  <br>
+  <button mat-raised-button (click)="ajoutSuspectsAffaire()">Ajouter Suspects à l'affaire</button>
+  <button class="mat-raised-button mat-primary" (click)="supectDelAffaire()">Suspects de l'affaire</button>
+  <br>
+  <br>
+  <button mat-raised-button (click)="ajouterVehiculesAffaire()">Ajouter Véhicules à l'affaire</button>
+  <button class="mat-raised-button mat-primary" (click)="vehiculeDelAffaire()">Véhicules de l'affaire</button>
+</div>
+
 
 <br>
 <br>

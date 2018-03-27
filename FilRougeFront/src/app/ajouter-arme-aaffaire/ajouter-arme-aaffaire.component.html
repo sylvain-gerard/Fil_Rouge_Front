@@ -4,12 +4,12 @@
 
   <div>
     <mat-form-field>
-      <input matInput type="text" placeholder="Recherche" name="recherche">
+      <input matInput type="text" placeholder="Recherche" name="recherche" #recherche>
     </mat-form-field>
-      <button mat-raised-button (click)="rechercher()"><mat-icon>search</mat-icon></button>
+    <button mat-raised-button (click)="rechercher(recherche.value)"><mat-icon>search</mat-icon></button>
   </div>
 
-  <div>
+  <div *ngIf="dataSourceArmes.data.length>0">
     <div class="filtreTableArmes">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">

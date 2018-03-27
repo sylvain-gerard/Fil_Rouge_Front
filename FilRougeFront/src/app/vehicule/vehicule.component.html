@@ -1,3 +1,89 @@
-<p>
-  vehicule works!
-</p>
+<div>
+  <div class="filtreTableVehicule">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+    </mat-form-field>
+  </div>
+
+  <mat-table class="filtreTableVehicule" #table [dataSource]="dataSourceVehicule" matSort>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+      <mat-cell *matCellDef="let vehicule"> {{vehicule.type}} </mat-cell>
+    </ng-container>
+
+    <!-- Marque Column -->
+    <ng-container matColumnDef="marque">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Marque </mat-header-cell>
+      <mat-cell *matCellDef="let vehicule"> {{vehicule.marque}} </mat-cell>
+    </ng-container>
+
+    <!-- Modele Column -->
+    <ng-container matColumnDef="modele">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Modèle </mat-header-cell>
+      <mat-cell *matCellDef="let vehicule"> {{vehicule.modele}} </mat-cell>
+    </ng-container>
+
+    <!-- Couleur Column -->
+    <ng-container matColumnDef="couleur_vehicule">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Couleur </mat-header-cell>
+        <mat-cell *matCellDef="let vehicule"> {{vehicule.couleur_vehicule}} </mat-cell>
+      </ng-container>
+
+    <!-- Immatriculation Column -->
+    <ng-container matColumnDef="immatriculation">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Immat. </mat-header-cell>
+      <mat-cell *matCellDef="let vehicule"> {{vehicule.immatriculation}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" 
+    (click)="highlight(row)"></mat-row>
+  </mat-table>
+</div>
+<br>
+<form #vehiculeForm="ngForm" (ngSubmit)="onSubmit(vehiculeForm)">
+  <mat-form-field class="inputFullWidth">
+    <input matInput placeholder="Type" required name="type" [(ngModel)]="vehi.type">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput type="marque" placeholder="Marque" name="marque" [(ngModel)]="vehi.marque">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput type="modele" placeholder="Modèle" name="modele" [(ngModel)]="vehi.modele">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput type="couleur_vehicule" placeholder="Couleur" name="couleur_vehicule" [(ngModel)]="vehi.couleur_vehicule">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <input matInput type="immatriculation" placeholder="Immat." name="immatriculation" [(ngModel)]="vehi.immatriculation">
+  </mat-form-field>
+
+  <br>
+  <mat-form-field class="inputFullWidth">
+    <textarea matInput matTextareaAutosize placeholder="Infos complémentaires :" name="infos_complementaire" [(ngModel)]="vehi.infos_complementaire"></textarea>
+  </mat-form-field>
+
+  <br>
+  <br>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!vehiculeForm.valid">{{edition ? 'Modifier' : 'Créer'}}</button>  
+</form>
+<br>
+<br>
+<!-- A faire -->
+<button class="mat-raised-button mat-primary" [disabled]="!edition" (click)="vehiculeDelAffaire()">Affaire liée au véhicule</button>
+
+<br>
+<br>
+<button mat-raised-button (click)="cancelSelect()">Effacer</button>
+<button mat-raised-button (click)="deleteAffaire()">Supprimer</button>
+<br>

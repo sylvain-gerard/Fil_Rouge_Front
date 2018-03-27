@@ -4,10 +4,14 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatTableDataSource,
-  MatSort
+  MatSort,
+  MatSnackBar
 } from '@angular/material';
 import { Iarme } from '../iarme';
 import { ArmesService } from '../armes.service';
+import { AffaireService } from '../affaire.service';
+import { Iaffaire } from '../iaffaire';
+import { Iobjetsaffaire } from '../iobjetsaffaire';
 
 @Component({
   selector: 'app-ajouter-arme-aaffaire',
@@ -17,10 +21,13 @@ import { ArmesService } from '../armes.service';
 export class AjouterArmeAaffaireComponent implements OnInit {
   arme: Iarme;
   armes: Iarme[];
-  selectedArme:boolean=false;
+  affaire: Iaffaire;
+  selectedArme: boolean;
   selectedRowIndex: number = -1;
 
   constructor(
+    private snackBar:MatSnackBar,
+    private affaireService: AffaireService,
     private armeService: ArmesService,
     public dialogRef: MatDialogRef<AjouterArmeAaffaireComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -42,32 +49,43 @@ export class AjouterArmeAaffaireComponent implements OnInit {
     this.dataSourceArmes.filter = filterValue;
   }
 
-  ngOnInit() {
-    this.refreshTab();
-  }
-
-  refreshTab() {
-    this.armeService.getArmes().subscribe((data: Iarme[]) => {
-      this.dataSourceArmes = new MatTableDataSource(data);
-      this.dataSourceArmes.sort=this.sort;
-    });
+  ngOnInit() { 
+    this.affaireService.getOneAffaire(this.data).subscribe(affaire=>this.affaire = affaire);
   }
 
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.arme = Object.assign({}, row);
-    this.selectedArme=true;
+    this.selectedArme = true;
   }
 
-  closeDial(){
+  closeDial() {
     this.dialogRef.close();
   }
 
-  addArmeToAffaire(){
-    this.selectedArme=false;
+  addArmeToAffaire() {
+    this.selectedArme = false;
+    this.selectedRowIndex=-1;
+    let idAffaireEtArme: Iobjetsaffaire = {
+      idAffaire: this.affaire.id_affaire,
+      idObjet: this.arme.id
+    };
+    this.armeService.addArmeAffaire(idAffaireEtArme).subscribe(
+      result=> {this.afficherMessage("Enregistrement effectué", "")},
+      error => {this.afficherMessage("", "Arme déjà présente dans l'affaire")}
+    )
   }
 
-  rechercher(){
-    
+  afficherMessage(message:string, erreur: string){
+    this.snackBar.open(message,erreur, {
+      duration: 2000,
+    });
   }
+
+  rechercher(recherche) {
+    this.armeService.searchArmes(recherche).subscribe((data: Iarme[]) => {
+      this.dataSourceArmes = new MatTableDataSource(data);
+      this.dataSourceArmes.sort = this.sort;
+    });
+  } 
 }

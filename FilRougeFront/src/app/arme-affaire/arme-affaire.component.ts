@@ -2,6 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Iarme } from '../iarme';
 import { ArmesService } from '../armes.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AffaireService } from '../affaire.service';
+import { Iaffaire } from '../iaffaire';
+import { Iobjetsaffaire } from '../iobjetsaffaire';
 
 @Component({
   selector: 'app-arme-affaire',
@@ -10,16 +13,28 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class ArmeAffaireComponent implements OnInit {
   armes: Iarme[];
+  arme: Iarme;
+  affaire:Iaffaire;
 
   constructor(
+    private affaireService: AffaireService,
     private armeService: ArmesService,
     public dialogRef: MatDialogRef<ArmeAffaireComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit() {
-    console.log(this.data);
-    
+    this.affaire = {
+      nom_affaire: '',
+      date_creation: null,
+      vehicule: [],
+      arme: [],
+      suspect: [],
+      infos_affaire: '',
+      classee: false
+    };
+    this.armes=[];
+    this.affaireService.getOneAffaire(this.data).subscribe(affaire=>this.affaire = affaire);
     this.refreshList();
   }
 
@@ -29,7 +44,14 @@ export class ArmeAffaireComponent implements OnInit {
 
   closeDial(){
     this.dialogRef.close();
-    console.log(this.armes)
+  }
+
+  delierDeLaffaire(idArme){
+    let idAffaireEtArme: Iobjetsaffaire = {
+      idAffaire: this.affaire.id_affaire,
+      idObjet: idArme
+    };
+    this.armeService.supprArmeAffaire(idAffaireEtArme).subscribe(succes=>this.refreshList());
   }
 
   test(){

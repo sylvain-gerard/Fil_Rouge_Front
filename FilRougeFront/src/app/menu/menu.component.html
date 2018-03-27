@@ -7,9 +7,11 @@
 </div>
 
 <mat-nav-list>
-  <a href="" routerLink="/affaires" (click)="sideNavService.toggleNav()"><h3>Affaires</h3></a>
-  <a href="" routerLink="/suspects" (click)="sideNavService.toggleNav()"><h3>Suspects</h3></a>
-  <a href="" routerLink="/armes" (click)="sideNavService.toggleNav()"><h3>Armes</h3></a>
-  <a href="" routerLink="/vehicules" (click)="sideNavService.toggleNav()"><h3>Véhicules</h3></a>
+  <mat-list>
+    <mat-list-item routerLinkActive="active" routerLink="/affaires" (click)="sideNavService.toggleNav()">Affaires</mat-list-item>
+    <mat-list-item routerLinkActive="active" routerLink="/suspects" (click)="sideNavService.toggleNav()">Suspects</mat-list-item>
+    <mat-list-item routerLinkActive="active" routerLink="/armes" (click)="sideNavService.toggleNav()">Armes</mat-list-item>
+    <mat-list-item routerLinkActive="active" routerLink="/vehicules" (click)="sideNavService.toggleNav()">Véhicules</mat-list-item>
+  </mat-list>
 </mat-nav-list>
 

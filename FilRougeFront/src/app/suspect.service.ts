@@ -17,6 +17,14 @@ export class SuspectService {
     return this.api.getSuspects() as Observable<Isuspect[]>;
   }
 
+  getSuspectsAffaire(id): Observable<Isuspect[]>{
+    return this.api.getSuspectsAffaire(id) as Observable<Isuspect[]>;
+  }
+
+  searchSuspects(recherche): Observable<Isuspect[]>{
+    return this.api.searchSuspects(recherche) as Observable<Isuspect[]>;
+  }
+
   updateSuspect(suspect: Isuspect): Observable<Isuspect> {
     return this.api
       .updateSuspect(suspect.id, suspect)

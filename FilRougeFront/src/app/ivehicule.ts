@@ -1,16 +1,16 @@
-import { Iaffaire } from "./iaffaire";
+import { Iaffaire } from './iaffaire';
 
 export interface Ivehicule {
 
-    id:number;
+    id: number;
     type: string;
     marque: string;
-    modele:string;
-    affaire:Iaffaire[];
-    infos_complementaire:string;
-    photo:string;
-    couleur_vehicule:string;
-    immatriculation:string;
+    modele: string;
+    affaire: Iaffaire[];
+    infos_complementaire: string;
+    photo: string;
+    couleur_vehicule: string;
+    immatriculation: string;
 
 
 }

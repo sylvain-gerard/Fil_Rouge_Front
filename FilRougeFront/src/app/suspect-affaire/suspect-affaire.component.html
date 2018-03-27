@@ -1,3 +1,21 @@
-<p>
-  suspect-affaire works!
-</p>
+
+<h2 mat-dialog-title *ngIf="test(); else suspectVide">Liste des suspects liés à l'affaire : {{affaire.nom_affaire}}</h2>
+
+<ng-template #suspectVide>
+    <h2 mat-dialog-title>Aucun suspect n'est lié à cette affaire actuellement.</h2>
+</ng-template>
+
+<mat-dialog-content>
+  <mat-list *ngFor="let suspect of suspects">
+    <mat-list-item>
+      <div>{{suspect.matricule}} | {{suspect.nom}} {{suspect.prenom}} | {{suspect.sexe}}</div>
+      <button class="mat-button" matTooltip="Ne plus lier ce suspect à cette affaire." matTooltipPosition="right"><mat-icon>delete</mat-icon></button>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
+</mat-dialog-actions>
