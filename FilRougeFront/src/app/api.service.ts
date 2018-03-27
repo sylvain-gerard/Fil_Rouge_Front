@@ -12,8 +12,8 @@ import { IfObservable } from 'rxjs/observable/IfObservable';
 
 @Injectable()
 export class ApiService {
-  URL: string = 'http://192.168.1.109:8080/api';
-  // URL: string = 'http://localhost:8080/api';
+  // URL: string = 'http://192.168.1.109:8080/api';
+  URL: string = 'http://localhost:8080/api';
 
 
   constructor(private http: HttpClient) {}
@@ -100,6 +100,10 @@ export class ApiService {
 
   getAffairesVehicule(id) {
     return this.http.get<Iaffaire[]>(`${this.URL}/vehicule/${id}/affaires`);
+  }
+
+  deleteAffairesVehicule(idAffaireEtVehicule: Iobjetsaffaire) {
+    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtVehicule.idAffaire}/vehicule/${idAffaireEtVehicule.idObjet}`);
   }
 
   searchVehicules(recherche) {
