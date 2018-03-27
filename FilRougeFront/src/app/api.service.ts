@@ -7,6 +7,7 @@ import { Iarme } from './iarme';
 import { Iutilisateur } from './iutilisateur';
 import { Ivehicule } from './ivehicule';
 import { Isuspect } from './isuspect';
+import { Iobjetsaffaire } from './iobjetsaffaire';
 
 @Injectable()
 export class ApiService {

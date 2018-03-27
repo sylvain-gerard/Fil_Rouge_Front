@@ -42,11 +42,11 @@ export class AffaireLieesSuspectComponent implements OnInit {
     };
     this.refreshTab();
     this.suspectService.update$.subscribe(() => this.refreshTab());
+    this.refreshList();
   }
-  refreshTab() {
-    this.suspectService.getSuspects().subscribe((data: Isuspect[]) => {
-      this.dataSourceSuspect = new MatTableDataSource(data);
-      this.dataSourceSuspect.sort = this.sort;
-    });
+  refreshList() {
+    this.suspectService.getSuspectAffaires(this.data).subscribe(affaires=>this.affaires=affaires)
+    console.log(this.affaires);
+    
   }
 }
