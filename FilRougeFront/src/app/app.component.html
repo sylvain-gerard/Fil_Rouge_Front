@@ -13,7 +13,7 @@
                                 <button mat-button (click)="sideNavService.toggleNav()"><mat-icon>exit_to_app</mat-icon></button>
                             </div>           
                 </mat-toolbar>
-            <app-body fxFlex="1"></app-body> <!--mettre un ngIf lorsqu'il y aura le module de connection en Oath2-->
+            <app-body [style.padding.em]="2" fxFlex="1"></app-body> <!--mettre un ngIf lorsqu'il y aura le module de connection en Oath2-->
             <app-footer></app-footer> 
         </div>
     </mat-sidenav-content>
