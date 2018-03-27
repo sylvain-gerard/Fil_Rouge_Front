@@ -4,7 +4,8 @@ import {
   MatTableDataSource,
   MatDialog,
   MatDialogConfig,
-  MatSort
+  MatSort,
+  MatSelectModule
 } from '@angular/material';
 import { AffaireService } from '../affaire.service';
 import { SuspectService } from '../suspect.service';
@@ -19,6 +20,10 @@ export class SuspectComponent implements OnInit {
   suspect: Isuspect;
   selectedRowIndex: number = -1;
   edition: boolean = false;
+  sexes = [
+            {value: 'M', viewValue: 'Male'},
+            {value: 'F', viewValue: 'Female'}
+  ];
 
   constructor(
   private suspectService: SuspectService,
@@ -26,7 +31,7 @@ export class SuspectComponent implements OnInit {
   public dialog: MatDialog, public dialog2: MatDialog
   ) {}
 
-  displayedColumns = ['nom', 'prenom', 'date_naissance', 'adresse', 'taille', 'poids', 'sexe', 'matricule'];
+  displayedColumns = ['nom', 'prenom', 'sexe', 'matricule'];
   dataSourceSuspect = new MatTableDataSource();
 
   @ViewChild(MatSort) sort: MatSort;

@@ -19,30 +19,6 @@
       <mat-cell *matCellDef="let Suspect"> {{Suspect.prenom}} </mat-cell>
     </ng-container>
 
-    <!-- Date de naisssance Column -->
-    <ng-container matColumnDef="date_naissance">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Né le </mat-header-cell>
-      <mat-cell *matCellDef="let Suspect"> {{Suspect.date_naissance}} </mat-cell>
-    </ng-container>
-
-    <!-- Adresse Column -->
-    <ng-container matColumnDef="adresse">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Adresse </mat-header-cell>
-      <mat-cell *matCellDef="let Suspect"> {{Suspect.adresse}} </mat-cell>
-    </ng-container>
-
-    <!-- Taille Column -->
-    <ng-container matColumnDef="taille">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Taille </mat-header-cell>
-      <mat-cell *matCellDef="let Suspect"> {{Suspect.taille}} </mat-cell>
-    </ng-container>
-
-    <!-- Poids Column -->
-    <ng-container matColumnDef="poids">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Poids </mat-header-cell>
-      <mat-cell *matCellDef="let Suspect"> {{Suspect.poids}} </mat-cell>
-    </ng-container>
-
     <!-- Sexe Column -->
     <ng-container matColumnDef="sexe">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Sexe </mat-header-cell>
@@ -96,8 +72,12 @@
   </mat-form-field>
 
   <br>
-  <mat-form-field class="inputFullWidth">
-    <input matInput placeholder="Sexe :" name="sexe" [(ngModel)]="suspect.sexe">
+  <mat-form-field>
+    <mat-select placeholder="Sexe :"  [(ngModel)]="suspect.sexe" name="sexe">
+        <mat-option *ngFor="let sexe of sexes" [value]="sexe.value">
+            {{ sexe.value }}
+          </mat-option>
+    </mat-select>
   </mat-form-field>
 
   <br>
