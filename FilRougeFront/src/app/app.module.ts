@@ -49,6 +49,7 @@ import { AjouterVehiculeAffaireComponent } from './ajouter-vehicule-affaire/ajou
 import { VehiculeAffaireComponent } from './vehicule-affaire/vehicule-affaire.component';
 import { SuspectAffaireComponent } from './suspect-affaire/suspect-affaire.component';
 import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
+import { AffairesLieesAuVehiculeComponent } from './affaires-liees-au-vehicule/affaires-liees-au-vehicule.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
     AjouterVehiculeAffaireComponent,
     VehiculeAffaireComponent,
     SuspectAffaireComponent,
-    ArmeAffaireComponent
+    ArmeAffaireComponent,
+    AffairesLieesAuVehiculeComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +113,8 @@ import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
     AjouterSuspectAffaireComponent,
     SuspectAffaireComponent,
     AjouterVehiculeAffaireComponent,
-    VehiculeAffaireComponent
+    VehiculeAffaireComponent,
+    AffairesLieesAuVehiculeComponent
   ]
 })
 export class AppModule {}

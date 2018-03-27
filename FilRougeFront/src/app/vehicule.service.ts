@@ -5,6 +5,7 @@ import { Ivehicule } from './ivehicule';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 import { Iobjetsaffaire } from './iobjetsaffaire';
+import { Iaffaire } from './iaffaire';
 
 @Injectable()
 export class VehiculeService {
@@ -15,6 +16,10 @@ export class VehiculeService {
 
   getVehicules(): Observable<Ivehicule[]> {
     return this.api.getVehicules() as Observable<Ivehicule[]>;
+  }
+
+  getOneVehicule(id): Observable<Ivehicule>{
+    return this.api.getOneVehicule(id) as Observable<Ivehicule>;
   }
 
   getVehiculesAffaire(id): Observable<Ivehicule[]>{
