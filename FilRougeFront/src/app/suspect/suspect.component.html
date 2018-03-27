@@ -104,8 +104,8 @@
   <button mat-raised-button color="primary" type="submit" [disabled]="!suspectForm.valid">{{edition ? 'Modifier' : 'Créer'}}</button>
 </form>
 <br>
-<br>
+<button class="mat-raised-button mat-primary" [disabled]="!edition" (click)="affairesDuSuspect()">Affaire liée au véhicule</button>
+<br><br>
 <button mat-raised-button (click)="cancelSelect()">Effacer</button>
 <button mat-raised-button (click)="deleteSuspect()">Supprimer</button>
-<br>
-<br>
+<br><br>

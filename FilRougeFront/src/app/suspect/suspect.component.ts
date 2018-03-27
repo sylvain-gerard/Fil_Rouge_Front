@@ -9,6 +9,7 @@ import {
 } from '@angular/material';
 import { AffaireService } from '../affaire.service';
 import { SuspectService } from '../suspect.service';
+import { AffaireLieesSuspectComponent} from '../affaire-liees-suspect/affaire-liees-suspect.component';
 
 
 @Component({
@@ -110,5 +111,11 @@ refreshTab() {
     this.edition = false;
     this.suspectService.deleteSuspect(this.suspect.id).subscribe();
     this.clearInput();
+  }
+  affairesDuSuspect() {
+    this.dialog.open(AffaireLieesSuspectComponent, {
+      width: '600px',
+      data: this.suspect.id
+    });
   }
 }
