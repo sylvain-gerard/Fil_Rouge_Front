@@ -22,7 +22,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './affaire-list.component.html',
   styleUrls: ['./affaire-list.component.css']
 })
-export class AffaireListComponent implements OnInit {
+export class AffaireListComponent implements OnInit, OnDestroy {
   aff: Iaffaire;
   armes: Iarme[];
   selectedRowIndex: number = -1;
@@ -67,12 +67,12 @@ export class AffaireListComponent implements OnInit {
     this.affaireService.update$.subscribe(() => this.refreshTab());
   }
 
-  // ngOnDestroy() {
-  //   this.getAffSubscription.unsubscribe();
-  //   this.createAffSubscription.unsubscribe();
-  //   this.updateAffSubscription.unsubscribe();
-  //   this.deleteAffSubscription.unsubscribe();
-  // }
+  ngOnDestroy() {
+    // this.getAffSubscription.unsubscribe();
+    // this.createAffSubscription.unsubscribe();
+    // this.updateAffSubscription.unsubscribe();
+    // this.deleteAffSubscription.unsubscribe();
+  }
 
   refreshTab() {
     this.affaireService

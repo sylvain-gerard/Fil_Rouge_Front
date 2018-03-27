@@ -4,12 +4,14 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatTableDataSource,
-  MatSort
+  MatSort,
+  MatSnackBar
 } from '@angular/material';
 import { Iarme } from '../iarme';
 import { ArmesService } from '../armes.service';
 import { AffaireService } from '../affaire.service';
 import { Iaffaire } from '../iaffaire';
+import { Iobjetsaffaire } from '../iobjetsaffaire';
 
 @Component({
   selector: 'app-ajouter-arme-aaffaire',
@@ -24,6 +26,7 @@ export class AjouterArmeAaffaireComponent implements OnInit {
   selectedRowIndex: number = -1;
 
   constructor(
+    private snackBar:MatSnackBar,
     private affaireService: AffaireService,
     private armeService: ArmesService,
     public dialogRef: MatDialogRef<AjouterArmeAaffaireComponent>,
@@ -63,7 +66,20 @@ export class AjouterArmeAaffaireComponent implements OnInit {
   addArmeToAffaire() {
     this.selectedArme = false;
     this.selectedRowIndex=-1;
-    this.armeService.addArmeAffaire(this.affaire.id_affaire, this.arme.id);
+    let idAffaireEtArme: Iobjetsaffaire = {
+      idAffaire: this.affaire.id_affaire,
+      idObjet: this.arme.id
+    };
+    this.armeService.addArmeAffaire(idAffaireEtArme).subscribe(
+      result=> {this.afficherMessage("Enregistrement effectué", "")},
+      error => {this.afficherMessage("", "Arme déjà présente dans l'affaire")}
+    )
+  }
+
+  afficherMessage(message:string, erreur: string){
+    this.snackBar.open(message,erreur, {
+      duration: 2000,
+    });
   }
 
   rechercher(recherche) {

@@ -19,7 +19,8 @@ import {
   MatDialogModule,
   MatSlideToggleModule,
   MatTooltipModule,
-  MatSortModule
+  MatSortModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -91,6 +92,7 @@ import { ArmeAffaireComponent } from './arme-affaire/arme-affaire.component';
     MatDialogModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatSnackBarModule,
     HttpClientModule
   ],
   providers: [
