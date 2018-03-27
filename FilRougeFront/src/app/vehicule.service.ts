@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 import { Iobjetsaffaire } from './iobjetsaffaire';
 import { Iaffaire } from './iaffaire';
-import { Iobjetsaffaire } from './iobjetsaffaire';
 
 @Injectable()
 export class VehiculeService {
