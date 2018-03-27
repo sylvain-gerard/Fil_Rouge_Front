@@ -119,7 +119,8 @@ import { AffairesLieesAarmeComponent } from './affaires-liees-aarme/affaires-lie
     AjouterVehiculeAffaireComponent,
     VehiculeAffaireComponent,
     AffairesLieesAuVehiculeComponent,
-    AffairesLieesAarmeComponent
+    AffairesLieesAarmeComponent,
+    AffaireLieesSuspectComponent
   ]
 })
 export class AppModule {}

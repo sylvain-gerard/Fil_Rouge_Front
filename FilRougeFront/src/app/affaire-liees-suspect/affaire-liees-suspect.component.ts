@@ -38,15 +38,31 @@ export class AffaireLieesSuspectComponent implements OnInit {
       taille : null,
       sexe: '',
       signes_particuliers: '',
-      matricule: ''
+      matricule: '',
+      affaire: []
     };
-    this.refreshTab();
-    this.suspectService.update$.subscribe(() => this.refreshTab());
+    this.affaires = [];
+    this.suspectService.getOnesuspect(this.data).subscribe(suspect => this.suspect = suspect);
     this.refreshList();
   }
   refreshList() {
-    this.suspectService.getSuspectAffaires(this.data).subscribe(affaires=>this.affaires=affaires)
+    this.suspectService.getSuspectAffaires(this.data).subscribe(affaires=>this.affaires=affaires);
     console.log(this.affaires);
-    
+
+  }
+  delierDeAffaire(idAffaire) {
+    const idAffaireSuspect: Iobjetsaffaire = {
+      idAffaire: idAffaire,
+      idObjet: this.suspect.id
+    };
+    this.suspectService.supprSuspectAffaire(idAffaireSuspect).subscribe(succes => this.refreshList());
+  }
+
+  test() {
+    if (this.affaires.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

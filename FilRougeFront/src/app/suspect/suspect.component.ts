@@ -51,13 +51,13 @@ export class SuspectComponent implements OnInit {
       adn: '',
       adresse: '',
       date_naissance: '',
-
       infos_suspect: '',
       poids: null,
       taille : null,
       sexe: '',
       signes_particuliers: '',
-      matricule: ''
+      matricule: '',
+      affaire: []
     };
     this.refreshTab();
     this.suspectService.update$.subscribe(() => this.refreshTab());
@@ -95,7 +95,8 @@ refreshTab() {
       taille : null,
       sexe: '',
       signes_particuliers: '',
-      matricule: ''
+      matricule: '',
+      affaire: []
     };
   }
 

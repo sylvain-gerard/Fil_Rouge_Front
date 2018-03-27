@@ -11,8 +11,8 @@ import { Iobjetsaffaire } from './iobjetsaffaire';
 
 @Injectable()
 export class ApiService {
-  // URL: string = 'http://192.168.1.109:8080/api';
-  URL: string = 'http://localhost:8080/api';
+  URL: string = 'http://192.168.1.109:8080/api';
+  //URL: string = 'http://localhost:8080/api';
 
 
   constructor(private http: HttpClient) {}
@@ -153,5 +153,29 @@ export class ApiService {
 
   deleteSuspect(id) {
     return this.http.delete<any>(`${this.URL}/suspect/${id}`);
+  }
+
+  getOneSuspect(id) {
+    return this.http.get<Isuspect>(`${this.URL}/suspect/${id}`);
+  }
+
+  getSuspectsAffaire(id) {
+    return this.http.get<Isuspect[]>(`${this.URL}/affaire/${id}/suspects`);
+  }
+
+  getSuspectAffaires(id) {
+    return this.http.get<Iaffaire[]>(`${this.URL}/suspect/affaires/${id}`);
+  }
+
+  searchSuspects(recherche) {
+    return this.http.get<Isuspect[]>(`${this.URL}/suspects/${recherche}`);
+  }
+
+  addSuspectAffaire(idAffaireEtVehicule: Iobjetsaffaire) {
+    return this.http.post<Iobjetsaffaire>(`${this.URL}/affaire/lierSuspect`, idAffaireEtVehicule);
+  }
+
+  supprSuspectAffaire(idAffaireEtSuspect: Iobjetsaffaire) {
+    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtSuspect.idAffaire}/suppVehicule/${idAffaireEtSuspect.idObjet}`)
   }
 }

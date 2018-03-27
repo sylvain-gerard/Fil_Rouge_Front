@@ -5,6 +5,7 @@ import { Isuspect } from './isuspect';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 import { Iobjetsaffaire } from './iobjetsaffaire';
+import { Iaffaire } from './iaffaire';
 
 @Injectable()
 export class SuspectService {
@@ -18,20 +19,28 @@ export class SuspectService {
     return this.api.getSuspects() as Observable<Isuspect[]>;
   }
 
-  getSuspectsAffaire(id): Observable<Isuspect[]>{
+  getSuspectsAffaire(id): Observable<Isuspect[]> {
     return this.api.getSuspectsAffaire(id) as Observable<Isuspect[]>;
   }
 
-  searchSuspects(recherche): Observable<Isuspect[]>{
+  getSuspectAffaires(id): Observable<Iaffaire[]> {
+    return this.api.getSuspectAffaires(id) as Observable<Iaffaire[]>;
+  }
+
+  searchSuspects(recherche): Observable<Isuspect[]> {
     return this.api.searchSuspects(recherche) as Observable<Isuspect[]>;
   }
 
-  addSuspectAffaire(idAffaireEtSuspect) : Observable<Iobjetsaffaire>{
+  addSuspectAffaire(idAffaireEtSuspect): Observable<Iobjetsaffaire> {
     return this.api.addSuspectAffaire(idAffaireEtSuspect) as Observable<Iobjetsaffaire>;
   }
 
-  supprSuspectAffaire(idAffaireEtSuspect) :Observable<Iobjetsaffaire>{
+  supprSuspectAffaire(idAffaireEtSuspect): Observable<Iobjetsaffaire> {
     return this.api.supprSuspectAffaire(idAffaireEtSuspect) as Observable<Iobjetsaffaire>;
+  }
+
+  getOnesuspect(id): Observable<Isuspect> {
+    return this.api.getOneSuspect(id) as Observable<Isuspect>;
   }
 
   updateSuspect(suspect: Isuspect): Observable<Isuspect> {
