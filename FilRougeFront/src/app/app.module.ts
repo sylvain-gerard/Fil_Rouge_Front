@@ -72,11 +72,8 @@ import { AffairesLieesAarmeComponent } from './affaires-liees-aarme/affaires-lie
     SuspectAffaireComponent,
     ArmeAffaireComponent,
     AffairesLieesAuVehiculeComponent,
-<<<<<<< HEAD
-    AffaireLieesSuspectComponent
-=======
+    AffaireLieesSuspectComponent,
     AffairesLieesAarmeComponent
->>>>>>> 341f47a2e03c1d2a47b855b2e60ca9c42fb058ea
   ],
   imports: [
     BrowserModule,
