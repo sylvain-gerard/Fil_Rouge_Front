@@ -24,10 +24,14 @@ export class SuspectService {
   }
 
   getSuspectAffaires(id): Observable<Iaffaire[]> {
-    return this.api.getSuspectAffaires(id) as Observable<Iaffaire[]>;
+      return this.api.getSuspectAffaires(id) as Observable<Iaffaire[]>;
+    }
+
+  getOnesuspect(id): Observable<Isuspect> {
+      return this.api.getOneSuspect(id) as Observable<Isuspect>;
   }
 
-  searchSuspects(recherche): Observable<Isuspect[]> {
+  searchSuspects(recherche): Observable<Isuspect[]>{
     return this.api.searchSuspects(recherche) as Observable<Isuspect[]>;
   }
 
@@ -37,10 +41,6 @@ export class SuspectService {
 
   supprSuspectAffaire(idAffaireEtSuspect): Observable<Iobjetsaffaire> {
     return this.api.supprSuspectAffaire(idAffaireEtSuspect) as Observable<Iobjetsaffaire>;
-  }
-
-  getOnesuspect(id): Observable<Isuspect> {
-    return this.api.getOneSuspect(id) as Observable<Isuspect>;
   }
 
   updateSuspect(suspect: Isuspect): Observable<Isuspect> {
