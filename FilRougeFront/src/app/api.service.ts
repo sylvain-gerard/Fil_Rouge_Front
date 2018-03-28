@@ -164,7 +164,7 @@ export class ApiService {
   }
 
   supprSuspectAffaire(idAffaireEtSuspect: Iobjetsaffaire) {
-    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtSuspect.idAffaire}/suppVehicule/${idAffaireEtSuspect.idObjet}`)
+    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtSuspect.idAffaire}/suspect/${idAffaireEtSuspect.idObjet}`)
   }
 
   updateSuspect(id, suspect: Isuspect) {

@@ -50,7 +50,7 @@ export class AffaireLieesSuspectComponent implements OnInit {
     console.log(this.affaires);
 
   }
-  delierDeAffaire(idAffaire) {
+  delierDeSuspect(idAffaire) {
     const idAffaireSuspect: Iobjetsaffaire = {
       idAffaire: idAffaire,
       idObjet: this.suspect.id
@@ -64,5 +64,9 @@ export class AffaireLieesSuspectComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  closeDial() {
+    this.dialogRef.close();
   }
 }
