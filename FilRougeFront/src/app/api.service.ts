@@ -79,8 +79,8 @@ export class ApiService {
     return this.http.post<Iobjetsaffaire>(`${this.URL}/affaire/lierArme`, idAffaireEtArme);
   }
 
-  supprArmeAffaire(idAffaireEtArme:Iobjetsaffaire){
-    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtArme.idAffaire}/suppArme/${idAffaireEtArme.idObjet}`)
+  supprArmeAffaire(idAffaireEtArme: Iobjetsaffaire) {
+    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtArme.idAffaire}/suppArme/${idAffaireEtArme.idObjet}`);
   }
 
   updateArme(id, arme: Iarme) {
@@ -124,7 +124,7 @@ export class ApiService {
   }
 
   supprVehiculeAffaire(idAffaireEtVehicule:Iobjetsaffaire){
-    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtVehicule.idAffaire}/suppVehicule/${idAffaireEtVehicule.idObjet}`)
+    return this.http.delete<any>(`${this.URL}/affaire/${idAffaireEtVehicule.idAffaire}/vehicule/${idAffaireEtVehicule.idObjet}`)
   }
 
   updateVehicule(id, vehicule: Ivehicule) {
