@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Iarme } from '../iarme';
 import { ArmesService } from '../armes.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
 import { AffaireService } from '../affaire.service';
 import { Iaffaire } from '../iaffaire';
 import { Iobjetsaffaire } from '../iobjetsaffaire';
@@ -12,16 +12,24 @@ import { Iobjetsaffaire } from '../iobjetsaffaire';
   styleUrls: ['./affaires-liees-aarme.component.css']
 })
 export class AffairesLieesAarmeComponent implements OnInit {
+  
   armes: Iarme[];
   arme: Iarme;
   affaire:Iaffaire;
   affaires: Iaffaire[];
-
+  aff: Iaffaire;
+  selectedRowIndex: number = -1;
+  edition: boolean = false;
+  selectedAffaire: boolean;
+  
   constructor(
     private affaireService: AffaireService,
     private armeService: ArmesService,
     public dialogRef: MatDialogRef<AffairesLieesAarmeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+    displayedColumns = ['nom_affaire', 'date_creation', 'date_cloture'];
+    dataSourceAffaire= new MatTableDataSource();
 
   ngOnInit() {
     this.arme = {
@@ -38,9 +46,24 @@ export class AffairesLieesAarmeComponent implements OnInit {
     this.refreshList();
   }
   refreshList() {
-    this.armeService.getArmeAffaires(this.data).subscribe(affaires=>this.affaires=affaires)
-    console.log(this.affaires);
-    
+    this.armeService.getArmeAffaires(this.data).subscribe(
+      affaires=>{
+        this.affaires=affaires;
+        this.dataSourceAffaire = new MatTableDataSource(this.affaires);
+      })    
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSourceAffaire.filter = filterValue;
+  }
+
+  highlight(row) {
+    this.selectedRowIndex = row.id_affaire;
+    this.aff = Object.assign({}, row);
+    this.edition = true;
+    this.selectedAffaire = true;
   }
 
   closeDial(){
@@ -48,6 +71,9 @@ export class AffairesLieesAarmeComponent implements OnInit {
   }
 
   delierDeLaffaire(idAffaire){
+    this.selectedAffaire = false;
+    this.selectedRowIndex=-1;
+    console.log(idAffaire);
     let idAffaireEtArme: Iobjetsaffaire = {
       idAffaire: idAffaire,
       idObjet: this.arme.id
