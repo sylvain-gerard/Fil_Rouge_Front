@@ -1,18 +1,41 @@
-<h2 mat-dialog-title *ngIf="test(); else affaireVide">Liste des affaires liées au vsuspect : {{suspect.matricule}}</h2>
+<h2 mat-dialog-title *ngIf="test(); else affaireVide">Liste des affaires liées au suspect : {{suspect.matricule}}</h2>
 
 <ng-template #affaireVide>
-    <h2 mat-dialog-title>Aucune affaire n'est liée à ce suspect actuellement.</h2>
+  <h2 mat-dialog-title>Aucune affaire n'est liée à ce suspect actuellement.</h2>
 </ng-template>
 
 <mat-dialog-content>
-  <mat-list *ngFor="let affaire of affaires">
-    <mat-list-item>
-      <div>{{affaire.nom_affaire}} | {{affaire.date_creation}} | {{affaire.date_cloture}}</div>
-      <button class="mat-button" matTooltip="Ne plus lier cette affaire à ce suspect" matTooltipPosition="right" (click)="delierDeSuspect(affaire.id_affaire)"><mat-icon>unlink</mat-icon></button>
-    </mat-list-item>
-  </mat-list>
+  
+  <div *ngIf="dataSourceAffaire.data.length>0">
+      <mat-table class="filtreTableAffaire" #table [dataSource]="dataSourceAffaire" matSort>
+
+          <!-- Nom Column -->
+          <ng-container matColumnDef="nom_affaire">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+            <mat-cell *matCellDef="let affaire"> {{affaire.nom_affaire}} </mat-cell>
+          </ng-container>
+      
+          <!-- Date Creation Column -->
+          <ng-container matColumnDef="date_creation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Création </mat-header-cell>
+            <mat-cell *matCellDef="let affaire"> {{affaire.date_creation}} </mat-cell>
+          </ng-container>
+      
+          <!-- Clos Column -->
+          <ng-container matColumnDef="date_cloture">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Classé le </mat-header-cell>
+            <mat-cell *matCellDef="let affaire"> {{affaire.date_cloture}} </mat-cell>
+          </ng-container>
+      
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id_affaire}" (click)="highlight(row)"></mat-row>
+        </mat-table>
+      </div>
 </mat-dialog-content>
+
 
 <mat-dialog-actions>
   <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
+  <button class="mat-raised-button mat-primary" matTooltip="Ne plus lier cette affaire à ce suspect." [disabled]="!selectedAffaire" (click)="delierDeSuspect(affaire.id_affaire)">Délier</button>
 </mat-dialog-actions>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Isuspect } from '../isuspect';
 import { SuspectService } from '../suspect.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
 import { AffaireService } from '../affaire.service';
 import { Iaffaire } from '../iaffaire';
 import { Iobjetsaffaire } from '../iobjetsaffaire';
@@ -16,12 +16,18 @@ export class AffaireLieesSuspectComponent implements OnInit {
   affaires: Iaffaire[];
   suspect: Isuspect;
   suspects: Isuspect[];
+  selectedRowIndex = -1;
+  edition = false;
+  selectedAffaire: boolean;
 
    constructor(
     private affaireService: AffaireService,
     private suspectService: SuspectService,
     public dialogRef: MatDialogRef<AffaireLieesSuspectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+    displayedColumns = ['nom_affaire', 'date_creation', 'date_cloture'];
+    dataSourceAffaire = new MatTableDataSource();
 
 
   ngOnInit() {
@@ -45,11 +51,28 @@ export class AffaireLieesSuspectComponent implements OnInit {
     this.suspectService.getOnesuspect(this.data).subscribe(suspect => this.suspect = suspect);
     this.refreshList();
   }
-  refreshList() {
-    this.suspectService.getSuspectAffaires(this.data).subscribe(affaires=>this.affaires=affaires);
-    console.log(this.affaires);
 
+  refreshList() {
+    this.suspectService.getSuspectAffaires(this.data).subscribe(
+      affaires => {
+        this.affaires = affaires;
+        this.dataSourceAffaire = new MatTableDataSource(this.affaires);
+      });
   }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSourceAffaire.filter = filterValue;
+  }
+
+  highlight(row) {
+    this.selectedRowIndex = row.id_affaire;
+    this.affaire = Object.assign({}, row);
+    this.edition = true;
+    this.selectedAffaire = true;
+  }
+
   delierDeSuspect(idAffaire) {
     const idAffaireSuspect: Iobjetsaffaire = {
       idAffaire: idAffaire,
