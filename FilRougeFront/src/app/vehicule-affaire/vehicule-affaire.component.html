@@ -1,21 +1,53 @@
 
-<h2 mat-dialog-title *ngIf="test(); else vehiculeVide">Liste des véhicules liés à l'affaire : {{affaire.nom_affaire}}</h2>
+<h2 mat-dialog-title *ngIf="test(); else vehiculeVide">Liste des véhicules liés à l'affaire :</h2>
 
 <ng-template #vehiculeVide>
     <h2 mat-dialog-title>Aucun véhicule n'est lié à cette affaire actuellement.</h2>
 </ng-template>
 
 <mat-dialog-content>
-  <mat-list *ngFor="let vehicule of vehicules">
-    <mat-list-item>
-      <div>{{vehicule.type}} | {{vehicule.marque}} | {{vehicule.modele}} | {{vehicule.couleur_vehicule}}</div>
-      <button class="mat-button" matTooltip="Ne plus lier ce véhicule à cette affaire." matTooltipPosition="right" (click)="delierDeLaffaire(vehicule.id)"><mat-icon>unlink</mat-icon></button>
-    </mat-list-item>
-  </mat-list>
+  
+  <div *ngIf="dataSourceVehicule.data.length>0">
+      <mat-table class="filtreTableVehicule" #table [dataSource]="dataSourceVehicule" matSort>
 
+          <!-- Type Column -->
+          <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+            <mat-cell *matCellDef="let vehicule"> {{vehicule.type}} </mat-cell>
+          </ng-container>
+      
+          <!-- Marque Column -->
+          <ng-container matColumnDef="marque">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Marque </mat-header-cell>
+            <mat-cell *matCellDef="let vehicule"> {{vehicule.marque}} </mat-cell>
+          </ng-container>
+      
+          <!-- Modèle Column -->
+          <ng-container matColumnDef="modele">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Modèle </mat-header-cell>
+            <mat-cell *matCellDef="let vehicule"> {{vehicule.modele}} </mat-cell>
+          </ng-container>
+
+          <!-- Couleur Column -->
+          <ng-container matColumnDef="couleur_vehicule">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Couleur </mat-header-cell>
+            <mat-cell *matCellDef="let vehicule"> {{vehicule.couleur_vehicule}} </mat-cell>
+          </ng-container>
+
+          <!-- Immatriculation Column -->
+          <ng-container matColumnDef="immatriculation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Immat. </mat-header-cell>
+            <mat-cell *matCellDef="let vehicule"> {{vehicule.immatriculation}} </mat-cell>
+          </ng-container>
+      
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></mat-row>
+        </mat-table>
+      </div>
 </mat-dialog-content>
-
 
 <mat-dialog-actions>
   <button class="mat-raised-button" (click)="closeDial()">Fermer</button>
+  <button class="mat-raised-button mat-primary" matTooltip="Ne plus lier ce véhicule à cette affaire." [disabled]="!selectedVehicule" (click)="delierDeLaffaire(vehicule.id)">Délier</button>
 </mat-dialog-actions>

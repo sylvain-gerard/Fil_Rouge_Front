@@ -3,7 +3,7 @@ import { Ivehicule } from '../ivehicule';
 import { Iaffaire } from '../iaffaire';
 import { AffaireService } from '../affaire.service';
 import { VehiculeService } from '../vehicule.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
 import { Iobjetsaffaire } from '../iobjetsaffaire';
 
 @Component({
@@ -13,8 +13,11 @@ import { Iobjetsaffaire } from '../iobjetsaffaire';
 })
 export class VehiculeAffaireComponent implements OnInit {
   vehicules: Ivehicule[];
-  vehicule:Ivehicule;
+  vehicule: Ivehicule;
   affaire: Iaffaire;
+  selectedRowIndex = -1;
+  edition = false;
+  selectedVehicule: boolean;
 
   constructor(
     private affaireService: AffaireService,
@@ -22,6 +25,9 @@ export class VehiculeAffaireComponent implements OnInit {
     public dialogRef: MatDialogRef<VehiculeAffaireComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  displayedColumns = ['type', 'marque', 'modele', 'couleur_vehicule', 'immatriculation'];
+  dataSourceVehicule = new MatTableDataSource();
 
   ngOnInit() {
     this.affaire = {
@@ -39,7 +45,24 @@ export class VehiculeAffaireComponent implements OnInit {
   }
 
   refreshList() {
-    this.vehiculeService.getVehiculesAffaire(this.data).subscribe(vehicules=>this.vehicules=vehicules)
+    this.vehiculeService.getVehiculesAffaire(this.data).subscribe(
+      vehicules => {
+        this.vehicules = vehicules;
+        this.dataSourceVehicule = new MatTableDataSource(this.vehicules);
+      });
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSourceVehicule.filter = filterValue;
+  }
+
+  highlight(row) {
+    this.selectedRowIndex = row.id;
+    this.vehicule = Object.assign({}, row);
+    this.edition = true;
+    this.selectedVehicule = true;
   }
 
   closeDial(){
