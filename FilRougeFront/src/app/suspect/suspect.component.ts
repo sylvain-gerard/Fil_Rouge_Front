@@ -5,6 +5,7 @@ import {
   MatDialog,
   MatDialogConfig,
   MatSort,
+  MatSnackBar,
   MatSelectModule
 } from '@angular/material';
 import { AffaireService } from '../affaire.service';
@@ -27,6 +28,7 @@ export class SuspectComponent implements OnInit {
   ];
 
   constructor(
+  private snackBar: MatSnackBar,
   private suspectService: SuspectService,
   private affaireService: AffaireService,
   public dialog: MatDialog, public dialog2: MatDialog
@@ -102,11 +104,23 @@ refreshTab() {
 
   onSubmit() {
     if (this.edition) {
-      this.suspectService.updateSuspect(this.suspect).subscribe();
+      this.suspectService.updateSuspect(this.suspect).subscribe(
+        result => {this.afficherMessage('Update effectué', ''); },
+       error => {this.afficherMessage('', 'Suspect déjà présent'); }
+      );
     } else {
-      this.suspectService.createSuspect(this.suspect).subscribe();
+      this.suspectService.createSuspect(this.suspect).subscribe(
+        result => {this.afficherMessage('Enregistrement effectué', ''); },
+       error => {this.afficherMessage('', 'Suspect déjà présent'); }
+      );
     }
   }
+
+  afficherMessage(message: string, erreur: string) {
+            this.snackBar.open(message, erreur, {
+              duration: 2000,
+               });
+          }
 
   deleteSuspect() {
     this.edition = false;
